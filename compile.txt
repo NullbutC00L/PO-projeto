@@ -1,2 +1,2 @@
 find . -name "*.java" -print | xargs javac
- java -Dui=swing editor.Main
+ java -Dui=swing poof.Main
