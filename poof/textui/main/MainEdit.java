@@ -35,6 +35,7 @@ public class MainEdit extends Menu {
 		    });
 
 		entry(2).invisible();
+		entry(3).invisible();
 		entry(4).invisible();
 		entry(5).invisible();
 		
@@ -45,6 +46,7 @@ public class MainEdit extends Menu {
      **/
     public void showOptionsNonEmptyEditor() {
 	entry(2).visible();
+	entry(3).visible();
 	entry(4).visible();
 	entry(5).visible();
     }
