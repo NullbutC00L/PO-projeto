@@ -139,11 +139,13 @@ public class FileSystem implements Serializable{
 
     public void setUser(List<User> users){
        System.out.println(users);
+       _user=new ArrayList<User>();
        for(User obj:users){
         _user.add(obj);
         }
         
     }
+ 
 
 
 

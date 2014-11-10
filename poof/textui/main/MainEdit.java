@@ -24,7 +24,7 @@ public class MainEdit extends Menu {
      */
     public MainEdit(Shell system) {
 	super(poof.textui.main.MenuEntry.TITLE, new Command<?>[] {
-		new poof.textui.main.commands.New(system),
+			new poof.textui.main.commands.New(system),
 			new poof.textui.main.commands.Open(system),
 			new poof.textui.main.commands.Save(system),
 			new poof.textui.main.commands.Login(system),
