@@ -6,6 +6,7 @@ import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
 
+import poof.core.User;
 import poof.core.Shell;
 import poof.textui.user.MenuEntry;
 
@@ -33,6 +34,10 @@ public class ListUsers extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+
+    for(User u:entity().getFileSystem().getAllUsers()){
+    	System.out.println(u.toString());
+    }
      
 
        

@@ -95,6 +95,7 @@ public class FileSystem implements Serializable{
     */
 
 	public List<User> getAllUsers (){
+        Collections.sort(_user);
         return _user;
 
         
