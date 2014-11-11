@@ -38,7 +38,9 @@ public class FileSystem implements Serializable{
 
     public FileSystem(){
         _user.add(new SuperUser());
-        _path.add((new SuperUser()).getDir());
+        _path.add((new Directory("home",null,false))); //tou a criar o directorio principal
+        _path.add((new SuperUser()).getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
+
     }
 
 
@@ -51,13 +53,13 @@ public class FileSystem implements Serializable{
     * 
     */
 
-	public List list(){
+	public List<User> list(){
         return _user;
        
 
 	}
 
-	/**
+	/*
     * list lista todas as entradas.
     * 
     * @return uma lista.
@@ -143,12 +145,9 @@ public class FileSystem implements Serializable{
        for(User obj:users){
         _user.add(obj);
         }
+
         
     }
- 
-
-
-
 
 
 

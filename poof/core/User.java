@@ -37,7 +37,7 @@ public class User implements Serializable , Comparable< User>{
 	public User (String user,String name ){
 		_userName=user;
 		_name=name;
-        _directory= new Directory("home",name,false);
+        _directory= new Directory(name,"home",false);
 	}
 
 
@@ -77,7 +77,9 @@ public class User implements Serializable , Comparable< User>{
 
 	}
 
-
+    public String getUsername(){
+        return _userName;
+    }
 
     public Directory getDir(){
         return _directory; 

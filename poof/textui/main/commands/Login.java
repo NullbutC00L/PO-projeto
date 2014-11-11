@@ -5,11 +5,13 @@ package poof.textui.main.commands;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
+import pt.utl.ist.po.ui.InputString;
 
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
 
 import poof.textui.main.MainEdit;
+import java.io.IOException;
 
 
 import static pt.utl.ist.po.ui.UserInteraction.IO;
@@ -36,11 +38,23 @@ public class Login extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
-     
+    	//pode tar tudo mal
+    	
+
+	        Form f = new Form(title());
+	    	InputString file = new InputString(f,"LoginUsername");
+	         
+	        f.parse();
+
+	        entity().loginTry(file.toString());
+	     
 
        
         
 
         
-    }
+   		 
+
+
+}
 }

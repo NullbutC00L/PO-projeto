@@ -34,11 +34,14 @@ public class ListUsers extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+        Display d = new Display(title());
+        d.add("-------- User --------");
 
-    for(User u:entity().getFileSystem().getAllUsers()){
-    	System.out.println(u.toString());
-    }
-     
+        for(User u:entity().getFileSystem().getAllUsers()){
+            d.addNewLine(u.toString());
+        }
+        d.addNewLine("-------------------------");
+        d.display();
 
        
         

@@ -23,7 +23,7 @@ import java.util.Collections;
 
 public class Shell implements Serializable{
     FileSystem _system=new FileSystem();
-
+    User _currentUser;
 	/**
     * create cria um novo sistema de ficheiros	
     * 
@@ -104,10 +104,23 @@ public class Shell implements Serializable{
     */
 
    public String showActualPath(){
+
         String path="anibals";
         return path;
 
    }
+   
+   public void loginTry(String log){
+    for(User u:_system.list()){
+        if(u.getUsername().equals(log)){
+           
+            _currentUser=u;
+        }
+    
+    }
+
+   }
+   
 
 	
 }
