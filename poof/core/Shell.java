@@ -8,6 +8,7 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import poof.textui.exception.UserUnknownException;
 
 
 import java.util.List;
@@ -22,8 +23,14 @@ import java.util.Collections;
 */
 
 public class Shell implements Serializable{
-    FileSystem _system=new FileSystem();
-    User _currentUser;
+    private FileSystem _system=new FileSystem();
+
+    private User _currentUser= ((_system.list()).get(0));
+
+
+   
+    
+    
 	/**
     * create cria um novo sistema de ficheiros	
     * 
@@ -110,16 +117,29 @@ public class Shell implements Serializable{
 
    }
    
-   public void loginTry(String log){
-    for(User u:_system.list()){
-        if(u.getUsername().equals(log)){
-           
-            _currentUser=u;
+   public void loginTry(String log)throws UserUnknownException{
+            for(User u:_system.list()){
+                if(u.getUsername().equals(log)){
+                
+                    _currentUser=u;
+
+                    return;
+                }
+            
+            }
+                throw new UserUnknownException(log);
         }
-    
+
+    public User getCurrentUser()
+    {
+        return  _currentUser;
     }
 
-   }
+
+        
+
+
+   
    
 
 	

@@ -96,6 +96,10 @@ public class Directory extends Entries implements Serializable{
 
 	}
 
+    public String toString(){
+        return "/"+_fatherDir+"/"+this.getName()+"/";
+    }
+
 
 
 

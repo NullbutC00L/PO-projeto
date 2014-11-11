@@ -87,7 +87,7 @@ public class User implements Serializable , Comparable< User>{
 
     public String toString()
     {
-        return  (_userName + ":" +_name + ":"+"Directory.toString()");
+        return  (_userName + ":" +_name + ":"+_directory.toString());
     }
 
     public int compareTo(User other)
