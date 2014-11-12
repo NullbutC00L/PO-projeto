@@ -2,7 +2,7 @@ package poof;
 
 import poof.textui.main.MainEdit;
 import poof.core.Shell ;
-//import poof.parser.ParseFile;
+import poof.parser.ParseFile;
 
 
 
@@ -25,7 +25,8 @@ public class Main {
      */
     public static void main(String args[]) {
         Shell system= new Shell();
-    /*if (System.getProperty("import")!=null){
+
+    if (System.getProperty("import")!=null){
         ParseFile text=new ParseFile();
         
         system.getFileSystem().changeFileSystem(text.parse(System.getProperty("import")));
@@ -35,12 +36,12 @@ public class Main {
         menu.open();
         IO.close();
 
-    }*/
-
-	Menu menu = new MainEdit(system);
-	menu.open();
-	IO.close();
-
+    }
+    else{
+	   Menu menu = new MainEdit(system);
+	   menu.open();
+	   IO.close();
+    }
 	
     }
 }

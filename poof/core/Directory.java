@@ -116,6 +116,14 @@ public class Directory extends Entries implements Serializable{
     }
 
 
+    public Directory getInitialPath(){
+        if(getFather().getName().equals("home")){
+            return this;
+        }
+        else{
+            return getFather();
+        }
+    }
 
     public String showActualPath(){
         if (getFather()!=null)
@@ -125,20 +133,32 @@ public class Directory extends Entries implements Serializable{
         
     }
 
+    public void jumpDir(String name){
+        this.copyDir(_dirs.get(name));
+
+
+    }
+
+    public boolean searchDir(String name){
+        if(_dirs.get(name)==null)
+            return false;
+        else
+            return true;
+    }
    
 
 
 
-/*
+
     public void copyDir(Directory u){
 
-        this._dirs= new ArrayList<Directory>(u._dirs);
-        this._files= new ArrayList<Files>(u._files);
+        this._dirs= u._dirs;
+        this._files= u._files;
         this._fatherDir=u._fatherDir;
         this.setName(u.getName());
     }
 
-   */
+   
 
 
 
