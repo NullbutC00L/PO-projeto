@@ -2,6 +2,8 @@ package poof.core;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Collections;
 
 
@@ -15,14 +17,14 @@ public class Directory extends Entries implements Serializable{
     /**
     * directorio pai
     */
-    private String _fatherDir;
+    private Directory _fatherDir;
    
     
 
     /**
     * lista de directorios
     */
-    private List<Directory> _dirs= new ArrayList<Directory>();
+    private Map<String, Directory> _dirs = new HashMap<String, Directory>();
 
 
 
@@ -41,12 +43,12 @@ public class Directory extends Entries implements Serializable{
     * 
     */
 
-	public Directory (String dir,String father, boolean permission){
+	public Directory (String dir,Directory father, boolean permission){
 		
 		super(dir,permission);
         
 		_fatherDir=father;
-		_dirs.add(this);;
+		_dirs.put(dir,this);
 
 	}
 
@@ -63,7 +65,9 @@ public class Directory extends Entries implements Serializable{
 
 	public List<Entries> getEntries(){
         List<Entries> entries=new ArrayList<Entries>();
-		entries.addAll(_dirs);
+        List<Directory> list = new ArrayList<Directory>(_dirs.values());
+
+		entries.addAll(list);
         entries.addAll(_files);
         Collections.sort(entries);
 
@@ -82,7 +86,7 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createSubDir(String name){
-		_dirs.add(new Directory(name,this.getName(),this.getPermission()));
+		_dirs.put(name,new Directory(name,this,this.getPermission()));
 
 
 	}
@@ -100,17 +104,31 @@ public class Directory extends Entries implements Serializable{
 	}
 
     public String toString(){
-        return "/"+_fatherDir+"/"+this.getName();
+        return "/"+_fatherDir.getName()+"/"+this.getName();
     }
 
-    public List<Directory> getListDir(){
+    public Map<String,Directory> getListDir(){
         return _dirs;
     }
     
-    public String getFather(){
+    public Directory getFather(){
         return _fatherDir;
     }
 
+   
+
+
+
+/*
+    public void copyDir(Directory u){
+
+        this._dirs= new ArrayList<Directory>(u._dirs);
+        this._files= new ArrayList<Files>(u._files);
+        this._fatherDir=u._fatherDir;
+        this.setName(u.getName());
+    }
+
+   */
 
 
 

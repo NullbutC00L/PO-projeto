@@ -97,10 +97,9 @@ public class Shell implements Serializable{
     * 
     */
    public void copyState(Shell shell){
-    if((shell.getFileSystem().getAllUsers()) instanceof List){  
-    System.out.println("Aqui"+shell.getFileSystem().getAllUsers());}
+    
 
-    _system.setUser(shell.getFileSystem().getAllUsers());
+    _system.setUser(shell.getFileSystem().getUsers());
         
    }
     

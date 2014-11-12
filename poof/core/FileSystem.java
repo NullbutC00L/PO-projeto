@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -28,9 +30,10 @@ public class FileSystem implements Serializable{
     /**
     * lista de utilizadores
     */
-    private List<User> _user= new ArrayList<User>();
-
-    private User _currentUser= new SuperUser();
+    private Map<String, User> _user = new HashMap<String, User>();
+    
+    private User _currentUser= new SuperUser(_dir);
+  
 
     /**
     * lista de Path
@@ -38,8 +41,7 @@ public class FileSystem implements Serializable{
     private List<Directory> _path= new ArrayList<Directory>();
 
     public FileSystem(){
-
-        _user.add(_currentUser);
+        _user.put(_currentUser.getUserName(),_currentUser);
         _path.add(_dir); //tou a criar o directorio principal
         _path.add(_currentUser.getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
 
@@ -60,7 +62,7 @@ public class FileSystem implements Serializable{
     * 
     */
 
-	public List<User> list(){
+	public Map<String,User> list(){
         return _user;
        
 
@@ -120,8 +122,9 @@ public class FileSystem implements Serializable{
     */
 
 	public List<User> getAllUsers (){
-        Collections.sort(_user);
-        return _user;
+        List<User> list = new ArrayList<User>(_user.values());
+        Collections.sort(list);
+        return list;
 
         
 
@@ -154,20 +157,18 @@ public class FileSystem implements Serializable{
     */
 
 
-    public void createUser(String user,String name){
+    public void createUser(String user,String name){ ////////////////////////falta o trow
 
-        _user.add(new User(user,name));
+        _user.put(user,new User(user,name,_dir));
         System.out.println(_user.size());
 
     }
 
 
-    public void setUser(List<User> users){
+    public void setUser(Map<String,User> users){
        System.out.println(users);
-       _user=new ArrayList<User>();
-       for(User obj:users){
-        _user.add(obj);
-        }
+       _user=new HashMap<String,User>(users);
+
 
 
         
@@ -190,6 +191,11 @@ public class FileSystem implements Serializable{
     }
     public User getCurrentUser(){
         return _currentUser;
+    }
+
+
+    public Map<String,User> getUsers(){
+        return _user;
     }
 
 

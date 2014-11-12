@@ -26,10 +26,11 @@ public class SuperUser extends User implements Serializable{
     */
 
 
-	public SuperUser(){
+	public SuperUser(Directory father){
 		
-		super("root","Super User") ;
-		_dir=new Directory("root","home",false);// aqui deve ser  subdirectory shit
+		super("root","Super User",father);
+        _dir=this.getDir();
+		//_dir=new Directory("root",father,false);// aqui deve ser  subdirectory shit
     }
 	/**
     * Troca a permissao de um directorio/ficheiro.
