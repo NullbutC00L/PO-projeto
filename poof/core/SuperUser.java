@@ -1,5 +1,7 @@
 package poof.core;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
 * Class SuperUser permite criar um Super User
@@ -53,14 +55,61 @@ public class SuperUser extends User implements Serializable{
     * @param owner e o novo dono de um directorio/ficheiro
     * 
     */
+     @Override
+	public void changeOwner(User user,String name){
+        boolean x=false;
+        System.out.println("changeOwner"+user);
+        _dir.setName(user.getName());
+        _dir.changeMap(this.getName(),user.getName());
+        
+        if(user.getDir().getListDir().size()==0){
+            System.out.println("entrei");
+            user.setDir(_dir);
+        }
+        else{
+            Directory next=user.getDir();
+            while(x==true){
+                 if (next.getListDir().get(name)!=null)
+                {
+                user.getDir().addElement(name,_dir.getListDir().get(name));
+                   x=false; 
+            
+                }
+                else{
+                    
+                    name=( String)_dir.getKey();
+                    _dir=_dir.nextDir(name);
+                    next=next.nextDir(name);
 
-	public void changeOwner(Entries entry, String owner){
-        entry.setName(owner);
+
+                    
+                    
+                    
+                    
+                    
+                    
 
 
-	}
 
+                    }
+            }
+
+            _dir=_dir.getInitialPath();
+            user.setDir(next.getInitialPath());
+        }
+
+
+        
+
+
+    }
+
+
+    
+
+
+}
+   
 
 
 	
-}

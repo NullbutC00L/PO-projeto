@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
 
 
 
@@ -48,7 +50,7 @@ public class Directory extends Entries implements Serializable{
 		super(dir,permission);
         
 		_fatherDir=father;
-		_dirs.put(dir,this);
+		
 
 	}
 
@@ -66,7 +68,7 @@ public class Directory extends Entries implements Serializable{
 	public List<Entries> getEntries(){
         List<Entries> entries=new ArrayList<Entries>();
         List<Directory> list = new ArrayList<Directory>(_dirs.values());
-
+        entries.add(this);
 		entries.addAll(list);
         entries.addAll(_files);
         Collections.sort(entries);
@@ -117,16 +119,17 @@ public class Directory extends Entries implements Serializable{
 
 
     public Directory getInitialPath(){
-        if(getFather().getName().equals("home")){
-            return this;
+        Directory u=this;
+        while(!(u.getFather().getName().equals("home"))){
+            u=u.getFather();
+            //System.out.println("pichota ->>>>> "+u);
         }
-        else{
-            return getFather();
-        }
+        return u;
+
     }
 
     public String showActualPath(){
-        if (getFather()!=null)
+        if (getFather()==null)
             return "";
         else
             return getFather().showActualPath()+"/"+getFather().getName();
@@ -134,7 +137,7 @@ public class Directory extends Entries implements Serializable{
     }
 
     public void jumpDir(String name){
-        this.copyDir(_dirs.get(name));
+        //this.copyDir(_dirs.get(name));
 
 
     }
@@ -145,18 +148,34 @@ public class Directory extends Entries implements Serializable{
         else
             return true;
     }
+
+    public void changeMap(String name,String newName){
+
+        Directory dir = _dirs.remove("name");
+        
+    }
    
 
-
-
-
-    public void copyDir(Directory u){
-
-        this._dirs= u._dirs;
-        this._files= u._files;
-        this._fatherDir=u._fatherDir;
-        this.setName(u.getName());
+    public Directory nextDir(String name){
+        return _dirs.get(name);
     }
+
+    
+    public String getKey(){
+        Set setA = new HashSet();
+        setA=_dirs.keySet();
+        for(Object object : setA) {
+
+            return (String)object;
+
+        }
+        return null;
+    }
+
+    public void addElement(String name,Directory dir){
+            _dirs.put(name,dir);
+        }
+
 
    
 

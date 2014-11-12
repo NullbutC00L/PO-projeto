@@ -97,7 +97,7 @@ public class ParseFile {
        
           if (_fileSystem.getCurrentUser().getDir().searchDir(args[i]))
           {
-            _fileSystem.getCurrentUser().getDir().jumpDir(args[i]);
+            _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
              System.out.println("oi"+_fileSystem.getCurrentUser().getDir().getListDir());
             
           }
@@ -105,19 +105,24 @@ public class ParseFile {
             System.out.println("antes"+_fileSystem.getCurrentUser().getDir().getListDir());
             _fileSystem.getCurrentUser().getDir().createSubDir(args[i]);
             System.out.println("meio"+_fileSystem.getCurrentUser().getDir().getListDir());
-            System.out.println("mid value->"+ _fileSystem.getCurrentUser().getDir());
-            _fileSystem.getCurrentUser().getDir().jumpDir(args[i]);
-            System.out.println("depois"+_fileSystem.getCurrentUser().getDir().getListDir());  
-             
+            
+            _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
+           System.out.println("depois"+_fileSystem.getCurrentUser().getDir().getListDir());
+            
+            
 
 
 
           }
-            
+            System.out.println(_fileSystem.getCurrentUser().getDir().showActualPath());
         }
+        _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getInitialPath());
+        System.out.println(args[2]);
+        _fileSystem.getCurrentUser().changeOwner(_fileSystem.list().get(args[2]), args[3]);
+        System.out.println("mudado"+_fileSystem.getCurrentUser().getDir().getListDir()); 
+         System.out.println("fabio"+_fileSystem.getCurrentUser().getDir().showActualPath());
 
-      
-       System.out.println(_fileSystem.getCurrentUser().getDir().getListDir());
+
 
     return null;
   }

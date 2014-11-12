@@ -43,6 +43,11 @@ public class User implements Serializable , Comparable< User>{
 
 	}
 
+    public void setDir(Directory dir )
+    {
+        _directory=dir;
+    }
+
 
 
 	
@@ -72,11 +77,12 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public void changeOwner(Entries entry, String owner){
-        
-            if( entry.getName()==_userName){
+	public void changeOwner(User user,String name){
+        /*
+            if( user.getName()==_userName){
             entry.setName(owner);
         }
+        */
 
 	}
 
