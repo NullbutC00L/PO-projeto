@@ -113,16 +113,16 @@ public class Shell implements Serializable{
 
    
    public void loginTry(String log)throws UserUnknownException{
-            for(User u:_system.list()){
-                if(u.getUsername().equals(log)){
-                
-                    _system.setCurrentUser(u);
-                    _system.setWorkDirectory(u);
+            
+                if(_system.getUsers().get(log)!=null){
+                    
+                    _system.setCurrentUser(_system.getUsers().get(log));
+                    _system.setWorkDirectory(_system.getUsers().get(log));
 
                     return;
                 }
             
-            }
+            
                 throw new UserUnknownException(log);
         }
 
