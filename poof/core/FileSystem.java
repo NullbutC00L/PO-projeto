@@ -23,24 +23,31 @@ import java.util.Collections;
 public class FileSystem implements Serializable{
 
 
-    private Directory _dir;
+    private Directory _dir=new Directory("home",null,false);
     
     /**
     * lista de utilizadores
     */
     private List<User> _user= new ArrayList<User>();
 
+    private User _currentUser= new SuperUser();
 
     /**
     * lista de Path
     */
-    private List<Entries> _path= new ArrayList<Entries>();
+    private List<Directory> _path= new ArrayList<Directory>();
 
     public FileSystem(){
-        _user.add(new SuperUser());
-        _path.add((new Directory("home",null,false))); //tou a criar o directorio principal
-        _path.add((new SuperUser()).getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
 
+        _user.add(_currentUser);
+        _path.add(_dir); //tou a criar o directorio principal
+        _path.add(_currentUser.getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
+
+    }
+
+
+    public List<Directory> getWorkDirectory(){
+        return _path;
     }
 
 
@@ -67,12 +74,23 @@ public class FileSystem implements Serializable{
     */
 
 
-	public List listElement(){
+	public List listElement(){//////////////////////////////////////////////////////////////////////////
         return _path;
 
 	}
 
 	
+    public void makeDir(String name){
+
+        
+                _currentUser.getDir().createSubDir(name);
+                System.out.println(_currentUser.getDir().getEntries());
+            
+
+
+        
+
+    }
 
 	/**
     * changeWorkDirectory remove a entrada do directorio de trabalho.
@@ -81,10 +99,15 @@ public class FileSystem implements Serializable{
     * 
     */
 
-	public Directory changeWorkDirectory(Directory dir){
-        _dir=dir;	
-        return _dir;
+	public void addDirectory(Directory dir){
+        _path.add(dir);
 	}
+
+
+
+    public void removeDirectory(){
+        _path.remove(_path.size()-1);
+    }
 
 
 
@@ -146,8 +169,29 @@ public class FileSystem implements Serializable{
         _user.add(obj);
         }
 
+
         
     }
+
+    public void setWorkDirectory(User user){
+        _path.clear();
+        _path.add(_dir);
+        _path.add(user.getDir());
+    }
+
+    public void changeFileSystem(FileSystem system){
+        this._dir=system._dir;
+        this._path=system._path;
+        this._user=system._user;
+
+    }
+    public void setCurrentUser(User user){
+        _currentUser=user;
+    }
+    public User getCurrentUser(){
+        return _currentUser;
+    }
+
 
 
 

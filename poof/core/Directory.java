@@ -2,15 +2,14 @@ package poof.core;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 
 public class Directory extends Entries implements Serializable{
 
 
-	/**
-    * Directorio 
-    */
-	private String _dir;
+	
 
 
     /**
@@ -24,6 +23,8 @@ public class Directory extends Entries implements Serializable{
     * lista de directorios
     */
     private List<Directory> _dirs= new ArrayList<Directory>();
+
+
 
     /**
     * lista de ficheiros
@@ -43,6 +44,7 @@ public class Directory extends Entries implements Serializable{
 	public Directory (String dir,String father, boolean permission){
 		
 		super(dir,permission);
+        
 		_fatherDir=father;
 		_dirs.add(this);;
 
@@ -59,10 +61,11 @@ public class Directory extends Entries implements Serializable{
     * 
     */
 
-	public List getEntries(){
+	public List<Entries> getEntries(){
         List<Entries> entries=new ArrayList<Entries>();
 		entries.addAll(_dirs);
         entries.addAll(_files);
+        Collections.sort(entries);
 
         return entries;
 
@@ -79,7 +82,7 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createSubDir(String name){
-		_dirs.add(new Directory(name,_fatherDir,this.getPermission()));
+		_dirs.add(new Directory(name,this.getName(),this.getPermission()));
 
 
 	}
@@ -97,8 +100,18 @@ public class Directory extends Entries implements Serializable{
 	}
 
     public String toString(){
-        return "/"+_fatherDir+"/"+this.getName()+"/";
+        return "/"+_fatherDir+"/"+this.getName();
     }
+
+    public List<Directory> getListDir(){
+        return _dirs;
+    }
+    
+    public String getFather(){
+        return _fatherDir;
+    }
+
+
 
 
 

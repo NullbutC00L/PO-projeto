@@ -5,7 +5,7 @@ package poof.textui.shell.commands;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
-
+import poof.core.Entries;
 import poof.core.Shell;
 import poof.textui.shell.MenuEntry;
 
@@ -33,7 +33,21 @@ public class Ls extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
-     
+    	Display d = new Display(title());
+        d.add("-------- Entries --------");
+        System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
+        String permission;
+        for(Entries u:entity().getFileSystem().getCurrentUser().getDir().getEntries()){
+            int tamanho=((2+entity().getFileSystem().getCurrentUser().getDir().getEntries().size()))*8;
+            if (u.getPermission()==true){
+                permission=new String("w ");
+            }
+            permission=new String("- ");
+
+            d.addNewLine("d "+permission+u.getName()+" "+tamanho);
+        }
+        d.addNewLine("-------------------------");
+        d.display();  
 
        
         

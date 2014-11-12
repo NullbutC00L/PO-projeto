@@ -34,10 +34,13 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public User (String user,String name ){
+	public User (String name,String user ){
 		_userName=user;
 		_name=name;
-        _directory= new Directory(name,"home",false);
+
+        _directory= new Directory(name,"home",false); 
+        
+
 	}
 
 
@@ -77,6 +80,10 @@ public class User implements Serializable , Comparable< User>{
 
 	}
 
+     public String getName(){
+        return _name;
+    }
+
     public String getUsername(){
         return _userName;
     }
@@ -94,6 +101,8 @@ public class User implements Serializable , Comparable< User>{
     {
         return _userName.compareTo(other._userName);
     }
+
+    
 
 
 

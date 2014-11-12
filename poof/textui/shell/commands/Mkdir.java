@@ -1,11 +1,11 @@
 package poof.textui.shell.commands;
 
 
-
+import pt.utl.ist.po.ui.InputString;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
-
+import poof.core.FileSystem;
 import poof.core.Shell;
 import poof.textui.shell.MenuEntry;
 
@@ -33,6 +33,14 @@ public class Mkdir extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+
+    	Form f = new Form(title());
+        
+    	InputString file = new InputString(f,"Dir Name");
+    	f.parse();
+
+    	entity().getFileSystem().makeDir(file.toString());
+
      
 
        

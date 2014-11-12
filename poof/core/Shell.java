@@ -23,9 +23,11 @@ import java.util.Collections;
 */
 
 public class Shell implements Serializable{
+
+
     private FileSystem _system=new FileSystem();
 
-    private User _currentUser= ((_system.list()).get(0));
+
 
 
    
@@ -110,18 +112,13 @@ public class Shell implements Serializable{
     * 
     */
 
-   public String showActualPath(){
-
-        String path="anibals";
-        return path;
-
-   }
    
    public void loginTry(String log)throws UserUnknownException{
             for(User u:_system.list()){
                 if(u.getUsername().equals(log)){
                 
-                    _currentUser=u;
+                    _system.setCurrentUser(u);
+                    _system.setWorkDirectory(u);
 
                     return;
                 }
@@ -130,10 +127,9 @@ public class Shell implements Serializable{
                 throw new UserUnknownException(log);
         }
 
-    public User getCurrentUser()
-    {
-        return  _currentUser;
-    }
+
+
+
 
 
         
