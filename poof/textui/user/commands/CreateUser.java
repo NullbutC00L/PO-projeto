@@ -13,7 +13,7 @@ import poof.textui.user.UserEdit;
 
 import java.io.IOException;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 /**
 * Comando para criar um novo Utilizador.
 * 
@@ -32,7 +32,7 @@ public class CreateUser extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation{
     	
         Form f = new Form(title());
         

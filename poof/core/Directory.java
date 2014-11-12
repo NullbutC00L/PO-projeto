@@ -115,6 +115,16 @@ public class Directory extends Entries implements Serializable{
         return _fatherDir;
     }
 
+
+
+    public String showActualPath(){
+        if (getFather()!=null)
+            return "";
+        else
+            return getFather().showActualPath()+"/"+getFather().getName();
+        
+    }
+
    
 
 

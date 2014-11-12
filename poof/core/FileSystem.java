@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import poof.textui.exception.*;
 
 
 
@@ -131,7 +131,6 @@ public class FileSystem implements Serializable{
 
 	}
 
-
 	/**
     * getAllEntries  obetem-se todos os ficheiros/directorios do sistema de ficheiros.
     * 
@@ -157,10 +156,18 @@ public class FileSystem implements Serializable{
     */
 
 
-    public void createUser(String user,String name){ ////////////////////////falta o trow
+    public void createUser(String user,String name) throws AccessDeniedException,UserExistsException {
+        if (_currentUser.getUserName().equals("Super User") ){
+                if(_user.get(user)==null){ 
+            _user.put(user,new User(user,name,_dir));
+            System.out.println(_user.size());
+            }
+            else
+                throw new UserExistsException(user);
+        }
+        else
+            throw new AccessDeniedException(_currentUser.getUserName());
 
-        _user.put(user,new User(user,name,_dir));
-        System.out.println(_user.size());
 
     }
 
