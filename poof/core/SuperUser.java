@@ -56,82 +56,12 @@ public class SuperUser extends User implements Serializable{
     * 
     */
      @Override
-	public void changeOwner(User user,String name, boolean bool){
-        
-        boolean x=true;
-        Directory next=user.getDir();
-        System.out.println("username->"+user.getName());
-        Directory dir=_dir.getListDir().get(user.getName());
-        dir=dir.getListDir().get(name);
-      
-
-        System.out.println("changeOwner"+user);
-
-        System.out.println("dir"+dir);
+	public void changeOwner(Entries entry,String name){
+        entry.setOwner(name);
        
-        if(user.getDir().getListDir().size()==0){
-            System.out.println("entrei_1");
-
-            dir.setFather(next);
-            System.out.println("next->"+ next+ "father do dir"+dir.getFather());
-            user.getDir().addElement(name,dir);
-
-            user.getDir().getListDir().get(name).setPermission(bool);
-        }
-        
-        else{
-            
-            while(x==true){
-                 if (next.getListDir().get(name)==null)
-                {
-                    System.out.println("entrei_2 de nome"+name);
-                
-                dir.setFather(next);
-                
-                user.getDir().addElement(name,dir);
-                 user.getDir().getListDir().get(name).setPermission(bool);
-                System.out.println("show->"+dir.showActualPath()+"/"+dir.getName());
-                   x=false; 
-            
-                }
-                else{
-                    System.out.println("entrei_3 nome"+name);
-                    name=( String)dir.getKey();
-                    System.out.println("name ->"+name);
-                     System.out.println("amntes next ->"+next);
-                    System.out.println("antes dir ->"+dir);
-                    dir=dir.nextDir(name);
-                    System.out.println("dir ->"+dir);
-                    if(next.nextDir(name)!=null){
-                        next=next.nextDir(name);
-                    }
-                    System.out.println("next ->"+next);
-
-
-
-
-
-                    }
-            }
-
-            dir=dir.getInitialPath();
-            
-            
-            user.setDir(next.getInitialPath());
-
-        }
-            
-            
-        //System.out.println("boooooooooleannnn passado na func-> "+bool+"");
-          //0
-          
-            System.out.println("booollll no dir caralhooooo -> "+user.getDir().getPermission()+"");
 
         
-        System.out.println("sai"+user.getDir().showActualPath());
-
     }
-
 
     
 

@@ -5,8 +5,10 @@ package poof.textui.shell.commands;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
+
 import poof.core.Entries;
 import poof.core.Shell;
+import poof.core.Directory;
 import poof.textui.shell.MenuEntry;
 
 import poof.textui.shell.ShellEdit;
@@ -33,20 +35,24 @@ public class Ls extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+        Directory u = entity().getFileSystem().getWorkDirectory();
     	Display d = new Display(title());
         d.add("-------- Entries --------");
+
+
+          d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
+
+          d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getName()+" "+(u.getFather().getSize())*8+" ..");
+          
+
+
+
         System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
-        String permission;
-        for(Entries u:entity().getFileSystem().getCurrentUser().getDir().getEntries()){
-            int tamanho=((2+entity().getFileSystem().getCurrentUser().getDir().getEntries().size()))*8;
-            if (u.getPermission()==true){
-                permission=new String("w ");
-            }
-            else{
-            permission=new String("- ");
-            }
-            System.out.println(u.getPermission());
-            d.addNewLine("d "+permission+u.getName()+" "+tamanho);
+        
+        for(Directory e: entity().getFileSystem().getCurrentUser().getDir().getOrder()){
+            int tamanho=(e.getSize())*8;
+
+            d.addNewLine("d "+e.permissionToString(e)+e.getOwner()+" "+tamanho+" "+e.getName());
         }
         d.addNewLine("-------------------------");
         d.display();  

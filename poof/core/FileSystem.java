@@ -24,14 +24,19 @@ import poof.textui.exception.*;
 
 public class FileSystem implements Serializable{
 
-
-    private Directory _dir=new Directory("home",null,false);
+     /**
+    * Objecto Directorio inicial Existente
+    */
+    private Directory _dir=new Directory("home",null,"root",false);
     
     /**
-    * lista de utilizadores
+    * HashMap de utilizadores
     */
     private Map<String, User> _user = new HashMap<String, User>();
     
+     /**
+    * Objecto User actual
+    */
     private User _currentUser= new SuperUser(_dir);
   
 
@@ -40,16 +45,29 @@ public class FileSystem implements Serializable{
     */
     private List<Directory> _path= new ArrayList<Directory>();
 
+    /**
+    *Construtor do FileSystem que vai inicializar os atributos iniciais do Filesystem
+    *
+    */
     public FileSystem(){
+       
+         _currentUser.getDir().setFather(_dir);
+         
+
+        
+       
         _user.put(_currentUser.getUserName(),_currentUser);
         _path.add(_dir); //tou a criar o directorio principal
         _path.add(_currentUser.getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
-
+        _dir.addElement(_currentUser.getName(),_user.get(_currentUser.getUserName()).getDir());
     }
 
-
-    public List<Directory> getWorkDirectory(){
-        return _path;
+    /**
+    *  getWorkDirectory vai enviar a lista de directorios
+    *   @return da lista de directorios actuais do Filesystem 
+    */
+    public Directory getWorkDirectory(){
+        return _dir;
     }
 
 
@@ -58,7 +76,7 @@ public class FileSystem implements Serializable{
 	/**
     * list lista todos os utilizadores.
     * 
-    * @return uma lista.
+    * @return um Map de Users.
     * 
     */
 
@@ -68,47 +86,43 @@ public class FileSystem implements Serializable{
 
 	}
 
-	/*
-    * list lista todas as entradas.
+	/**
+    * listElement lista todas as entradas por ordem.
     * 
-    * @return uma lista.
+    * @return uma lista ordenada.
     * 
     */
 
 
-	public List listElement(){//////////////////////////////////////////////////////////////////////////
+	public List listElement(){
         return _path;
 
 	}
 
 	
+    /**
+    *   makeDir cria um subdirectorio do directorio actual
+    *   @param recebe uma string que sera o nome do novo directorio
+    *
+    */
     public void makeDir(String name){
 
         
-                _currentUser.getDir().createSubDir(name);
-                System.out.println(_currentUser.getDir().getEntries());
+                _dir.createSubDir(name);
+                System.out.println(_dir);
             
-
-
-        
-
     }
 
-	/**
-    * changeWorkDirectory remove a entrada do directorio de trabalho.
-    * 
-    * @return e o novo directorio de trabalho.
-    * 
+
+
+
+
+    /**
+    *removeDirectory remove o ultimo directorio da lista de directorios
+    *
     */
-
-	public void addDirectory(Directory dir){
-        _path.add(dir);
-	}
-
-
-
     public void removeDirectory(){
-        _path.remove(_path.size()-1);
+        _dir=_dir.getFather();
     }
 
 
@@ -159,8 +173,17 @@ public class FileSystem implements Serializable{
     public void createUser(String user,String name) throws AccessDeniedException,UserExistsException {
         if (_currentUser.getUserName().equals("Super User") ){
                 if(_user.get(user)==null){ 
+            
+            
             _user.put(user,new User(user,name,_dir));
-            System.out.println(_user.size());
+            _user.get(user).getDir().setFather(_dir);
+            _dir.addElement(user,_user.get(user).getDir());
+            
+            //_dir.getListDir().put()
+           
+
+
+
             }
             else
                 throw new UserExistsException(user);
@@ -171,7 +194,10 @@ public class FileSystem implements Serializable{
 
     }
 
-
+    /**
+    *   setUser vai adicionar um novo user a lista de users
+    *@param Map de users
+    */
     public void setUser(Map<String,User> users){
        System.out.println(users);
        _user=new HashMap<String,User>(users);
@@ -180,31 +206,66 @@ public class FileSystem implements Serializable{
 
         
     }
+    /**
+    *   setWorkDirectory apaga o directorio actual do fileSystem e vai abrir o 
+    *   o directorio de trabalho do User passado
+    *   @param  User 
+    */
 
     public void setWorkDirectory(User user){
         _path.clear();
         _path.add(_dir);
         _path.add(user.getDir());
     }
-
+    /**
+    *   changeFileSystem vai mudar todos os atributos do Filesystem actual pelos
+    *   atributos do novo Filesystem, passando assim o Filesystem actual a ser
+    *   o Filesystem passado como parametro
+    *   @param Filesystem
+    */
     public void changeFileSystem(FileSystem system){
         this._dir=system._dir;
         this._path=system._path;
         this._user=system._user;
 
     }
+    /**
+    *   setCurrentUser associa um Novo objecto User ao user Actual 
+    *@param  User
+    *
+    */
     public void setCurrentUser(User user){
+        _dir=_dir.getListDir().get(user.getName());
         _currentUser=user;
     }
+    /**
+    *   getCurrentUser vai retornar qual e o user actualmente logado
+    *   @rateurn retorna o objecto User logado actualmente no systemFile
+    */
     public User getCurrentUser(){
         return _currentUser;
     }
 
-
+    /**
+    *   getUsers vai retornar qual e o Map actual com os utiizadores existentes
+    *   @return retorna o Map de todos os utilizadosres existentes no FileSystem actual
+    *
+    */
     public Map<String,User> getUsers(){
         return _user;
     }
 
+    public Directory actualDir()
+    {
+        return _dir;
+    }
+
+    public void jump(Directory dir){
+        _dir=dir;
+    }
+
+
+   
 
 
 

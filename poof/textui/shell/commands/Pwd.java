@@ -41,9 +41,10 @@ public class Pwd extends Command<Shell> {
         d.add("-------- User --------"+"\n");
 
 
-        for(Directory u:entity().getFileSystem().getWorkDirectory()){
-            d.add("/"+u.getName());
-        }
+        
+            d.add(entity().getFileSystem().getWorkDirectory().showActualPath()
+                +"/"+entity().getFileSystem().getWorkDirectory().getName());
+        
         d.addNewLine("-------------------------");
         d.display();
 

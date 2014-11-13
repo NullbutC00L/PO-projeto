@@ -1,7 +1,5 @@
 USER|vader|Darth Vader|/home/vader
 USER|yoda|Master Yoda|/home/yoda
 DIRECTORY|/home/vader/friends|vader|public
-DIRECTORY|/home/vader/friends/cenas|vader|public
-DIRECTORY|/home/vader/friends/cenas/cenas|vader|public
-DIRECTORY|/home/yoda/friends/cenas/cenas|yoda|public
-
+DIRECTORY|/home/vader/friends/jedi|yoda|private
+DIRECTORY|/home/vader/friends/yoda|yoda|public

@@ -33,8 +33,8 @@ public class Files extends Entries implements Serializable{
     * 
     */
 
-	public Files(String username,boolean permission){
-		super(username,permission);
+	public Files(String name,String owner ,boolean permission){
+		super(name,owner,permission);
 
 	}
 

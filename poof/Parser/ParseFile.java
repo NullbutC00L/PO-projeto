@@ -90,21 +90,22 @@ public class ParseFile {
         
 
        
-          if (_fileSystem.getCurrentUser().getDir().searchDir(args[i]))
+          if (_fileSystem.actualDir().searchDir(args[i])) //ver se existe este subdir
           {
-            _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
-            System.out.println("existe um igual vamos em frente-> "+_fileSystem.getCurrentUser().getDir().getListDir());
+            _fileSystem.jump(_fileSystem.actualDir().nextDir(args[i])); //vai ao directorio actual e jumpa
+
+            //System.out.println("existe um igual vamos em frente-> "+_fileSystem.actualDir());
              
             
           }
           else{
             
-            _fileSystem.getCurrentUser().getDir().createSubDir(args[i]);
-            System.out.println("fizemos um subdir-> "+_fileSystem.getCurrentUser().getDir().getListDir());
+            _fileSystem.actualDir().createSubDir(args[i]);
+            //System.out.println("fizemos um subdir-> "+ _fileSystem.actualDir());
+          
             
-            _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
-
-            System.out.println("depois->"+_fileSystem.getCurrentUser().getDir());
+            _fileSystem.jump(_fileSystem.actualDir().nextDir(args[i])); //vai ao directorio actual e jumpa
+            //System.out.println("depois->"+ _fileSystem.actualDir());
            
             
             
@@ -112,25 +113,29 @@ public class ParseFile {
 
 
           }
-            System.out.println(_fileSystem.getCurrentUser().getDir().showActualPath());
+           
         }
-        
-        
-        _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getInitialPath());
-        
-       System.out.println("vou entrar no change");
 
-       _fileSystem.getCurrentUser().changeOwner(_fileSystem.list().get(args[2]), args[3],bool);
+          ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.actualDir(),username);
+          System.out.println(_fileSystem.actualDir().getOwner());
+           System.out.println("show->"+_fileSystem.actualDir().showActualPath()+args[args.length-1]);
+        
+        _fileSystem.jump( _fileSystem.actualDir().getInitialPath());
+        
+       //System.out.println("vou entrar no change");
+
+       
           
 
-        System.out.println("root path"+_fileSystem.getCurrentUser().getDir());
+        //System.out.println("initial->"+_fileSystem.actualDir().getName());
+        //System.out.println("initial->"+_fileSystem.actualDir().getListDir());
        
 
       
 
-        _fileSystem.getCurrentUser().getDir().removeValue(args[2]);
+        
 
-        System.out.println("depois de apagado"+_fileSystem.getCurrentUser().getDir());
+        
 
     return null;
   }

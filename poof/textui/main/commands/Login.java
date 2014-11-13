@@ -39,7 +39,6 @@ public class Login extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
-    	//pode tar tudo mal
     		Display d = new Display(title());
     		try{
 	        Form f = new Form(title());

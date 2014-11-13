@@ -13,7 +13,7 @@ import java.util.HashSet;
 public class Directory extends Entries implements Serializable{
 
 
-	
+	private int _size=2;
 
 
     /**
@@ -45,9 +45,9 @@ public class Directory extends Entries implements Serializable{
     * 
     */
 
-	public Directory (String dir,Directory father, boolean permission){
+	public Directory (String dir,Directory father,String user, boolean permission){
 		
-		super(dir,permission);
+		super(dir,user,permission);
         
 		_fatherDir=father;
 		
@@ -88,7 +88,8 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createSubDir(String name){
-		_dirs.put(name,new Directory(name,this,this.getPermission()));
+		_dirs.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
+        _size+=1;
 
 
 	}
@@ -101,9 +102,12 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createFile(String name){
-			_files.add( new Files(name,this.getPermission()));
+			_files.add( new Files(name,this.getOwner(),this.getPermission()));
+            _size+=1;
 
 	}
+
+
 
     public String toString(){
         return "/"+_fatherDir.getName()+"/"+this.getName();
@@ -111,6 +115,14 @@ public class Directory extends Entries implements Serializable{
 
     public Map<String,Directory> getListDir(){
         return _dirs;
+    }
+
+    public List<Directory> getOrder(){
+    
+        List<Directory> list = new ArrayList<Directory>(_dirs.values());
+        
+        Collections.sort(list);
+        return list;
     }
     
     public Directory getFather(){
@@ -124,10 +136,11 @@ public class Directory extends Entries implements Serializable{
 
     public Directory getInitialPath(){
         Directory u=this;
-        while(!(u.getFather().getName().equals("home"))){
+        while(!(u.getFather()==null)){
             u=u.getFather();
-            //System.out.println("pichota ->>>>> "+u);
+            
         }
+        
         return u;
 
     }
@@ -164,6 +177,7 @@ public class Directory extends Entries implements Serializable{
         return _dirs.get(name);
     }
 
+
     
     public String getKey(){
         Set setA = new HashSet();
@@ -178,13 +192,30 @@ public class Directory extends Entries implements Serializable{
 
     public void addElement(String name,Directory dir){
             _dirs.put(name,dir);
+            _size+=1;
         }
     public void removeValue(String name){
         _dirs.remove(name);
+        _size-=1;
     }
 
+    public int getSize(){
+        return _size;
 
-   
+    }
+    public String permissionToString(Directory u ){
+        String permission;
+        if (u.getPermission()==true){
+                permission=new String("w ");
+                return permission;
+        }
+        else{
+            permission=new String("- ");
+            return permission;
+        }
+
+    }
+
 
 
 

@@ -38,20 +38,21 @@ public class User implements Serializable , Comparable< User>{
 		_userName=user;
 		_name=name;
 
-        _directory= new Directory(name,dir,false); 
+        _directory= new Directory(name,dir,name,false); 
         
 
 	}
+    /**
+    * Troca o directorio actual por um directorio passado nos parametros
+    * 
+    * @param directorio que vamos atribuir o novo directorio
+    * 
+    */
 
     public void setDir(Directory dir )
     {
         _directory=dir;
     }
-
-
-
-	
-
 
 
 	/**
@@ -77,32 +78,58 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public void changeOwner(User user,String name,boolean bool){
+	public void changeOwner(Entries entry,String name){
         /*
             if( user.getName()==_userName){
             entry.setName(owner);
         }
         */
 
-	}
+	} 
+    /**
+    * da-nos return do nome do User
+    * 
+    * @return da return do nome do User
+    * 
+    */
 
      public String getName(){
         return _name;
     }
-
+    /**
+    * da-nos return do nome do UserName
+    * 
+    * @return da return do nome do userName
+    * 
+    */
     public String getUserName(){
         return _userName;
     }
-
+   /**
+    * da-nos o Directorio do objecto User
+    * 
+    * @return da return do Directorio
+    * 
+    */
     public Directory getDir(){
         return _directory; 
     }
-
+   /**
+    * passa os parametros do User para o Formato de String que queremos
+    * 
+    * @return parametros do User em String
+    * 
+    */
     public String toString()
     {
         return  (_userName + ":" +_name + ":"+_directory.toString());
     }
-
+   /**
+    * Compara dois Users e e utilizado para o sort
+    * @param Recebe o Objecto User 
+    * @return o inteiro que vai tratar da organizacao da Lista de Users
+    * 
+    */
     public int compareTo(User other)
     {
         return _userName.compareTo(other._userName);

@@ -26,6 +26,8 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     */
 	private boolean _permission;
 
+    private String _owner;
+
 	/**
     * Constructor.
     * 
@@ -33,10 +35,11 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     * @param perm e a permissao do ficheiro/directorio.
     * 
     */
-	public Entries(String name, boolean perm)
+	public Entries(String name,String user ,boolean perm)
 	{
 		_name=name;
 		_permission=perm;
+        _owner=user;
 	}
 
     /**
@@ -83,22 +86,25 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
         _name=name;
     }
 
-	/**
-    * Constructor.
-    * 
-    * Remove um ficheiro/directorio		 
-    * 
+
+    /**
+    *   compareTo utilizado para ordenar as entradas
+    *   @return  inteiro
     */
-	public void remove(Entries file){
-        file=null;
-        
-    }
-
-
     public int compareTo(Entries other)
     {
         return _name.compareTo(other._name);
     }
+
+
+    public String getOwner(){
+        return _owner;
+    }
+
+    public void setOwner(String user){
+        _owner=user;
+    }
+
 
     
     
