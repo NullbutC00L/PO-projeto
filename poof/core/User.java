@@ -77,7 +77,7 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public void changeOwner(User user,String name){
+	public void changeOwner(User user,String name,boolean bool){
         /*
             if( user.getName()==_userName){
             entry.setName(owner);

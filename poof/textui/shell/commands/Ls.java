@@ -42,8 +42,10 @@ public class Ls extends Command<Shell> {
             if (u.getPermission()==true){
                 permission=new String("w ");
             }
+            else{
             permission=new String("- ");
-
+            }
+            System.out.println(u.getPermission());
             d.addNewLine("d "+permission+u.getName()+" "+tamanho);
         }
         d.addNewLine("-------------------------");

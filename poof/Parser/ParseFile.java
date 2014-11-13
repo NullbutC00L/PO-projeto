@@ -73,17 +73,12 @@ public class ParseFile {
   }
 
   private Entries createEntry(String path, String username, String permission, boolean isDir) {
-    int last = path.lastIndexOf('/');
-    /*String parentPath = path.substring(0, last);
-    System.out.println("pai no parse caralho    " + parentPath);
-    String entryName = path.substring(last + 1);
-     System.out.println("entry no parse caralho   " + entryName);
-     */
+ 
     String[] args = path.split("/");
-    
+      
     Entries entry;
     boolean bool=false;
-    if (permission.equals("true")){
+    if (permission.equals("public")){
       bool=true;
     }
 
@@ -91,23 +86,26 @@ public class ParseFile {
       
 
     
-      for(int i=3;i<args.length;i++){
-        System.out.println("aqui?"+args[i]);
+      for(int i=2;i<args.length;i++){
+        
 
        
           if (_fileSystem.getCurrentUser().getDir().searchDir(args[i]))
           {
             _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
-             System.out.println("oi"+_fileSystem.getCurrentUser().getDir().getListDir());
+            System.out.println("existe um igual vamos em frente-> "+_fileSystem.getCurrentUser().getDir().getListDir());
+             
             
           }
           else{
-            System.out.println("antes"+_fileSystem.getCurrentUser().getDir().getListDir());
+            
             _fileSystem.getCurrentUser().getDir().createSubDir(args[i]);
-            System.out.println("meio"+_fileSystem.getCurrentUser().getDir().getListDir());
+            System.out.println("fizemos um subdir-> "+_fileSystem.getCurrentUser().getDir().getListDir());
             
             _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getListDir().get(args[i]));
-           System.out.println("depois"+_fileSystem.getCurrentUser().getDir().getListDir());
+
+            System.out.println("depois->"+_fileSystem.getCurrentUser().getDir());
+           
             
             
 
@@ -116,13 +114,23 @@ public class ParseFile {
           }
             System.out.println(_fileSystem.getCurrentUser().getDir().showActualPath());
         }
+        
+        
         _fileSystem.getCurrentUser().setDir(_fileSystem.getCurrentUser().getDir().getInitialPath());
-        System.out.println(args[2]);
-        _fileSystem.getCurrentUser().changeOwner(_fileSystem.list().get(args[2]), args[3]);
-        System.out.println("mudado"+_fileSystem.getCurrentUser().getDir().getListDir()); 
-         System.out.println("fabio"+_fileSystem.getCurrentUser().getDir().showActualPath());
+        
+       System.out.println("vou entrar no change");
 
+       _fileSystem.getCurrentUser().changeOwner(_fileSystem.list().get(args[2]), args[3],bool);
+          
 
+        System.out.println("root path"+_fileSystem.getCurrentUser().getDir());
+       
+
+      
+
+        _fileSystem.getCurrentUser().getDir().removeValue(args[2]);
+
+        System.out.println("depois de apagado"+_fileSystem.getCurrentUser().getDir());
 
     return null;
   }

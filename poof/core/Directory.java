@@ -117,6 +117,10 @@ public class Directory extends Entries implements Serializable{
         return _fatherDir;
     }
 
+     public Directory setFather(Directory father){
+        return _fatherDir=father;
+    }
+
 
     public Directory getInitialPath(){
         Directory u=this;
@@ -151,7 +155,7 @@ public class Directory extends Entries implements Serializable{
 
     public void changeMap(String name,String newName){
 
-        Directory dir = _dirs.remove("name");
+        Directory dir = _dirs.remove(name);
         
     }
    
@@ -175,6 +179,9 @@ public class Directory extends Entries implements Serializable{
     public void addElement(String name,Directory dir){
             _dirs.put(name,dir);
         }
+    public void removeValue(String name){
+        _dirs.remove(name);
+    }
 
 
    
