@@ -40,21 +40,21 @@ public class Ls extends Command<Shell> {
    
 
 
-          d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
-
-          d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
+          //d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
+          System.out.println(u);
+          //d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
           
 
 
 
         //System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
-        
-        for(Directory e: entity().getFileSystem().getCurrentUser().getDir().getOrder()){
+        if( entity().getFileSystem().getWorkDirectory().getOrder()!=null){
+        for(Directory e: entity().getFileSystem().getWorkDirectory().getOrder()){
             int tamanho=(e.getSize())*8;
 
             d.addNewLine("d "+e.permissionToString(e)+e.getOwner()+" "+tamanho+" "+e.getName());
         }
-
+        }
         d.display();  
 
        

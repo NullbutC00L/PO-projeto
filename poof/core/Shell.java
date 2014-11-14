@@ -119,7 +119,6 @@ public class Shell implements Serializable{
                     
                     _system.setCurrentUser(_system.getUsers().get(log));
                     _system.setWorkDirectory(_system.getUsers().get(log));
-
                     return;
                 }
             
