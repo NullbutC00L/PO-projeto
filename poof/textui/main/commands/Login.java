@@ -10,6 +10,7 @@ import pt.utl.ist.po.ui.InputString;
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
 import poof.textui.exception.UserUnknownException;
+import pt.utl.ist.po.ui.InvalidOperation;
 import poof.textui.main.Message;
 import poof.textui.main.MainEdit;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class Login extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute()throws InvalidOperation {
     		Display d = new Display(title());
     		try{
 	        Form f = new Form(title());
@@ -50,9 +51,10 @@ public class Login extends Command<Shell> {
 	        d.display();
 	     	}
 	     	catch(UserUnknownException e){
-            e.printStackTrace();
-            d.display();
-        }
+                     throw new InvalidOperation(e.getMessage());
+            
+        }   
+        
 
        
         
