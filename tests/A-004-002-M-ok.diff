@@ -1,5 +1,5 @@
-*** tests/A-004-002-M-ok.out	2014-11-10 00:47:33.000000000 +0000
---- tests/A-004-002-M-ok.outhyp	2014-11-14 02:17:13.000000000 +0000
+*** tests/A-004-002-M-ok.out	Fri Nov 14 04:26:53 2014
+--- tests/A-004-002-M-ok.outhyp	Fri Nov 14 04:41:37 2014
 ***************
 *** 19,48 ****
   10 - Mudar permissões de entrada

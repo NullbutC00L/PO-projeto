@@ -1,5 +1,5 @@
-*** tests/A-002-002-M-ok.out	2014-11-10 10:29:27.000000000 +0000
---- tests/A-002-002-M-ok.outhyp	2014-11-14 02:17:12.000000000 +0000
+*** tests/A-002-002-M-ok.out	Fri Nov 14 04:26:53 2014
+--- tests/A-002-002-M-ok.outhyp	Fri Nov 14 04:41:36 2014
 ***************
 *** 23,29 ****
   10 - Mudar permissões de entrada
@@ -17,20 +17,3 @@
   Menu de Shell
   1 - Listar
   2 - Listar entrada
-***************
-*** 49,55 ****
-  1 - Criar utilizador
-  2 - Listar utilizadores
-  0 - Sair
-! Escolha uma opção: root:Super User:/home/root
-  Menu Utilizador
-  1 - Criar utilizador
-  2 - Listar utilizadores
---- 49,55 ----
-  1 - Criar utilizador
-  2 - Listar utilizadores
-  0 - Sair
-! Escolha uma opção: root:Super User:/home/Super User
-  Menu Utilizador
-  1 - Criar utilizador
-  2 - Listar utilizadores

@@ -38,7 +38,7 @@ public class User implements Serializable , Comparable< User>{
 		_userName=user;
 		_name=name;
 
-        _directory= new Directory(name,dir,name,false); 
+        _directory= new Directory(user,dir,user,false); 
         
 
 	}
