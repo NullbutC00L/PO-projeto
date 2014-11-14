@@ -94,20 +94,14 @@ public class ParseFile {
           {
             _fileSystem.jump(_fileSystem.actualDir().nextDir(args[i])); //vai ao directorio actual e jumpa
 
-            //System.out.println("existe um igual vamos em frente-> "+_fileSystem.actualDir());
-             
             
           }
           else{
             
             _fileSystem.actualDir().createSubDir(args[i]);
-            //System.out.println("fizemos um subdir-> "+ _fileSystem.actualDir());
-          
+            
             
             _fileSystem.jump(_fileSystem.actualDir().nextDir(args[i])); //vai ao directorio actual e jumpa
-            //System.out.println("depois->"+ _fileSystem.actualDir());
-           
-            
             
 
 
@@ -118,29 +112,26 @@ public class ParseFile {
 
           ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.actualDir(),username);
           ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.actualDir(),bool);
-          
-          //System.out.println(_fileSystem.actualDir().getOwner());
-          // System.out.println("show->"+_fileSystem.actualDir().showActualPath()+args[args.length-1]);
-        
+  
         _fileSystem.jump( _fileSystem.actualDir().getInitialPath());
         
-       //System.out.println("vou entrar no change");
-
        
-          
-
-        //System.out.println("initial->"+_fileSystem.actualDir().getName());
-        //System.out.println("initial->"+_fileSystem.actualDir().getListDir());
-       
-
-      
 
         
 
         
 
     return null;
-  }
+  } 
+    /**
+    * crea uma file com os parametros passados
+    * @param String path
+    * @param String username
+    *@param String permission
+    *@param String contente
+    * 
+    */
+
 
   public void createFile(String path, String username, String permission, String content) {
     Files file = (Files)createEntry(path, username, permission, false);

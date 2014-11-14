@@ -255,12 +255,22 @@ public class FileSystem implements Serializable{
     public Map<String,User> getUsers(){
         return _user;
     }
-
+        /**
+    * Desvolve o Direcotorio actual
+    * 
+    * @return Directory
+    * 
+    */
     public Directory actualDir()
     {
         return _dir;
     }
-
+    /**
+    *   vai saltar para um Directory que foi passado  no parametro
+    *   o directorio vai passar a ser o directorio passado
+    * @param Directory
+    * 
+    */
     public void jump(Directory dir){
         _dir=dir;
     }

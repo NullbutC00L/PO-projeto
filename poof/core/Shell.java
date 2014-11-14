@@ -106,9 +106,9 @@ public class Shell implements Serializable{
     
 
    /**
-    * showActualPath mosta o caminho absoluto do directorio de trabalho
+    * Vai fazer login do utilizador passado por uma string
     * 
-    * @return 
+    * 
     * 
     */
 
@@ -126,10 +126,22 @@ public class Shell implements Serializable{
                 throw new UserUnknownException(log);
         }
 
-
+    /**
+    * setName o nome da shell passa a ser o nome passado
+    * 
+    * @param String Name 
+    * 
+    */
     public void setName(String name){
         _name=name;
     } 
+
+
+    /**
+    *   da return do Nome da Shell
+    *
+    *   @return String name
+    */
 
     public String getName()
     {

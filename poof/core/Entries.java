@@ -94,12 +94,25 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     public int compareTo(Entries other)
     {
         return _name.compareTo(other._name);
-    }
+    }  
 
+    /**
+    * getOwner vai retornar o nome do utilizador actual
+    * 
+    * @return String do utilizador actual
+    * 
+    */
 
     public String getOwner(){
         return _owner;
     }
+
+    /**
+    * setOwner vai mudar o utilizador actual
+    * 
+    * @param String user;
+    * 
+    */
 
     public void setOwner(String user){
         _owner=user;
