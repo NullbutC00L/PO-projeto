@@ -16,17 +16,17 @@ public final class MenuEntry {
 	/** Remove element. */
 	public static final String RM = "Remover entrada";
 
-	/** Create directory. */
-	public static final String MKDIR = "Criar directório";
+	/** Change current path. */
+	public static final String CD = "Mudar o directório de trabalho";
 
 	/** Create file. */
 	public static final String TOUCH = "Criar ficheiro";
 
+	/** Create directory. */
+	public static final String MKDIR = "Criar directório";
+
 	/** Show current path. */
 	public static final String PWD = "Mostrar o directório de trabalho";
-
-	/** Change current path. */
-	public static final String CD = "Mudar o directório de trabalho";
 
 	/** Write file. */
 	public static final String APPEND = "Adicionar linha a ficheiro";

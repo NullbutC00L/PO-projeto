@@ -1,7 +1,7 @@
-package poof;
+package poof.textui;
 
 import poof.textui.main.MainEdit;
-import poof.core.Shell ;
+
 import poof.parser.ParseFile;
 
 
@@ -18,19 +18,23 @@ import static pt.utl.ist.po.ui.UserInteraction.IO;
  * @author Programação com Objectos
  * @version 3.0
  */
-public class Main {
+public class Shell {
 
     /**
      * @param args command line arguments.
      */
     public static void main(String args[]) {
-        Shell system= new Shell();
+
+        poof.core.Shell system= new poof.core.Shell();
 
     if (System.getProperty("import")!=null){
         ParseFile text=new ParseFile();
-        
+        try{
         system.getFileSystem().changeFileSystem(text.parse(System.getProperty("import")));
-        
+        }
+        catch(Exception e){
+            System.out.println("algo correu mal");
+        }
         Menu menu = new MainEdit(system);
         ((MainEdit)menu).showOptionsNonEmptyEditor();
         menu.open();

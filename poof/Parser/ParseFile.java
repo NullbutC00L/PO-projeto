@@ -28,7 +28,7 @@ public class ParseFile {
     BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
     _fileSystem = new FileSystem();
-
+    
     String line;
 
     while ((line = reader.readLine()) != null) {
@@ -117,8 +117,10 @@ public class ParseFile {
         }
 
           ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.actualDir(),username);
-          System.out.println(_fileSystem.actualDir().getOwner());
-           System.out.println("show->"+_fileSystem.actualDir().showActualPath()+args[args.length-1]);
+          ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.actualDir(),bool);
+          
+          //System.out.println(_fileSystem.actualDir().getOwner());
+          // System.out.println("show->"+_fileSystem.actualDir().showActualPath()+args[args.length-1]);
         
         _fileSystem.jump( _fileSystem.actualDir().getInitialPath());
         

@@ -9,6 +9,7 @@ import pt.utl.ist.po.ui.Form;
 import poof.core.Shell;
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
+import poof.textui.main.Message;
 import pt.utl.ist.po.ui.InputString;
 
 import poof.textui.main.MainEdit;
@@ -36,14 +37,24 @@ public class Save extends Command<Shell> {
     @SuppressWarnings("nls")
     public final void execute() {
     	try{
+
+            if (entity().getName()==null){
             Form f = new Form(title());
-            InputString file = new InputString(f,"Save");
+
+            InputString file = new InputString(f, Message.newSaveAs());
          
             f.parse();
   
 
        
-            Shell.save(file.toString()+".bin", entity());
+            Shell.save(file.toString(), entity());
+            entity().setName(file.toString());
+            }
+            else{
+                Shell.save(entity().getName(), entity());
+
+            }
+
         
         }
         catch(IOException e){

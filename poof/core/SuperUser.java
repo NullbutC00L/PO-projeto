@@ -30,7 +30,7 @@ public class SuperUser extends User implements Serializable{
 
 	public SuperUser(Directory father){
 		
-		super("root","Super User",father);
+		super("Super User","root",father);
         _dir=this.getDir();
 		//_dir=new Directory("root",father,false);// aqui deve ser  subdirectory shit
     }

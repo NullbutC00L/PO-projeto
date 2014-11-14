@@ -37,24 +37,24 @@ public class Ls extends Command<Shell> {
     public final void execute() {
         Directory u = entity().getFileSystem().getWorkDirectory();
     	Display d = new Display(title());
-        d.add("-------- Entries --------");
+   
 
 
           d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
 
-          d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getName()+" "+(u.getFather().getSize())*8+" ..");
+          d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
           
 
 
 
-        System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
+        //System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
         
         for(Directory e: entity().getFileSystem().getCurrentUser().getDir().getOrder()){
             int tamanho=(e.getSize())*8;
 
             d.addNewLine("d "+e.permissionToString(e)+e.getOwner()+" "+tamanho+" "+e.getName());
         }
-        d.addNewLine("-------------------------");
+
         d.display();  
 
        

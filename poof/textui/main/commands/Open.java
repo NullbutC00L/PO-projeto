@@ -9,6 +9,7 @@ import pt.utl.ist.po.ui.InputString;
 
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
+import poof.textui.main.Message;
 
 import poof.textui.main.MainEdit;
 import java.io.IOException;
@@ -39,13 +40,13 @@ public class Open extends Command<Shell> {
     	entity().create();
         try{
         Form f = new Form(title());
-    	InputString file = new InputString(f,"Load");
+    	InputString file = new InputString(f,Message.openFile());
          
         f.parse();
        
         
         
-        entity().copyState(Shell.open(file.toString()+".bin"));
+        entity().copyState(Shell.open(file.toString()));
         
         
 

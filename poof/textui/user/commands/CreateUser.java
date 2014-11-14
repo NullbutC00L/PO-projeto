@@ -8,7 +8,7 @@ import pt.utl.ist.po.ui.Form;
 
 import poof.core.Shell;
 import poof.textui.user.MenuEntry;
-
+import poof.textui.user.Message;
 import poof.textui.user.UserEdit;
 
 import java.io.IOException;
@@ -35,13 +35,14 @@ public class CreateUser extends Command<Shell> {
     public final void execute() throws InvalidOperation{
     	
         Form f = new Form(title());
-        
-    	InputString file = new InputString(f,"User Name");
-    	InputString file_1 = new InputString(f,"Name");
+
+        InputString file_1 = new InputString(f,Message.nameRequest());
+    	InputString file = new InputString(f,Message.usernameRequest());
+    	
          
         f.parse();
 
-        entity().getFileSystem().createUser(file.toString(),file_1.toString());
+        entity().getFileSystem().createUser(file_1.toString(),file.toString());
 
        
         

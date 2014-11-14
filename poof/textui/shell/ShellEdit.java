@@ -27,10 +27,12 @@ public class ShellEdit extends Menu {
 		new poof.textui.shell.commands.Ls(system), 
 		new poof.textui.shell.commands.LsEntry(system),
 		new poof.textui.shell.commands.Rm(system), 
-		new poof.textui.shell.commands.Mkdir(system),
-		new poof.textui.shell.commands.Touch(system),
-		new poof.textui.shell.commands.Pwd(system),
 		new poof.textui.shell.commands.Cd(system),
+		new poof.textui.shell.commands.Touch(system),
+		new poof.textui.shell.commands.Mkdir(system),
+		
+		new poof.textui.shell.commands.Pwd(system),
+		
 		new poof.textui.shell.commands.Append(system),
 		new poof.textui.shell.commands.Cat(system),
 		new poof.textui.shell.commands.Chmod(system),

@@ -25,7 +25,8 @@ import java.util.Collections;
 public class Shell implements Serializable{
 
 
-    private FileSystem _system=new FileSystem();
+    private FileSystem _system= new FileSystem();
+    private String _name;
 
 
 
@@ -126,6 +127,15 @@ public class Shell implements Serializable{
                 throw new UserUnknownException(log);
         }
 
+
+    public void setName(String name){
+        _name=name;
+    } 
+
+    public String getName()
+    {
+        return _name;
+    }
     
 
 

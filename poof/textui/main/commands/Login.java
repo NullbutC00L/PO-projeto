@@ -10,7 +10,7 @@ import pt.utl.ist.po.ui.InputString;
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
 import poof.textui.exception.UserUnknownException;
-
+import poof.textui.main.Message;
 import poof.textui.main.MainEdit;
 import java.io.IOException;
 
@@ -42,17 +42,15 @@ public class Login extends Command<Shell> {
     		Display d = new Display(title());
     		try{
 	        Form f = new Form(title());
-	    	InputString file = new InputString(f,"LoginUsername");
+	    	InputString file = new InputString(f,Message.usernameRequest());
 	         
 	        f.parse();
 
 	        entity().loginTry(file.toString());
-	        d.add("esta agora Logado com o user: "+file.toString());
 	        d.display();
 	     	}
 	     	catch(UserUnknownException e){
             e.printStackTrace();
-            d.add("User não existe");
             d.display();
         }
 

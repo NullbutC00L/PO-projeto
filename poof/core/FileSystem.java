@@ -53,13 +53,14 @@ public class FileSystem implements Serializable{
        
          _currentUser.getDir().setFather(_dir);
          
-
+         _currentUser.getDir().setOwner("root");
         
        
         _user.put(_currentUser.getUserName(),_currentUser);
         _path.add(_dir); //tou a criar o directorio principal
         _path.add(_currentUser.getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
         _dir.addElement(_currentUser.getName(),_user.get(_currentUser.getUserName()).getDir());
+
     }
 
     /**
@@ -109,7 +110,6 @@ public class FileSystem implements Serializable{
 
         
                 _dir.createSubDir(name);
-                System.out.println(_dir);
             
     }
 
@@ -171,7 +171,7 @@ public class FileSystem implements Serializable{
 
 
     public void createUser(String user,String name) throws AccessDeniedException,UserExistsException {
-        if (_currentUser.getUserName().equals("Super User") ){
+        if (_currentUser.getUserName().equals("root") ){
                 if(_user.get(user)==null){ 
             
             
@@ -199,7 +199,6 @@ public class FileSystem implements Serializable{
     *@param Map de users
     */
     public void setUser(Map<String,User> users){
-       System.out.println(users);
        _user=new HashMap<String,User>(users);
 
 
@@ -263,6 +262,7 @@ public class FileSystem implements Serializable{
     public void jump(Directory dir){
         _dir=dir;
     }
+
 
 
    

@@ -38,14 +38,13 @@ public class Pwd extends Command<Shell> {
 
 
     	  Display d = new Display(title());
-        d.add("-------- User --------"+"\n");
+        
 
 
         
             d.add(entity().getFileSystem().getWorkDirectory().showActualPath()
                 +"/"+entity().getFileSystem().getWorkDirectory().getName());
         
-        d.addNewLine("-------------------------");
         d.display();
 
        

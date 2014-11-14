@@ -1,0 +1,19 @@
+*** tests/A-002-003-M-ok.out	2014-11-10 10:29:51.000000000 +0000
+--- tests/A-002-003-M-ok.outhyp	2014-11-14 02:17:12.000000000 +0000
+***************
+*** 26,32 ****
+  1 - Criar utilizador
+  2 - Listar utilizadores
+  0 - Sair
+! Escolha uma opção: root:Super User:/home/root
+  Menu Utilizador
+  1 - Criar utilizador
+  2 - Listar utilizadores
+--- 26,32 ----
+  1 - Criar utilizador
+  2 - Listar utilizadores
+  0 - Sair
+! Escolha uma opção: root:Super User:/home/Super User
+  Menu Utilizador
+  1 - Criar utilizador
+  2 - Listar utilizadores
