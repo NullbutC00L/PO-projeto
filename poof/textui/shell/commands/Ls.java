@@ -41,7 +41,7 @@ public class Ls extends Command<Shell> {
 
 
           d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
-          System.out.println(u);
+
           d.addNewLine("d "+u.getFather().permissionToString(u)+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
           
 

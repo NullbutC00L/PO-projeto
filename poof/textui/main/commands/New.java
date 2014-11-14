@@ -33,8 +33,17 @@ public class New extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
-    	((MainEdit)menu()).showOptionsNonEmptyEditor();
-    	entity().create();
+        try{
+        
+        
+        ((MainEdit)menu()).showOptionsNonEmptyEditor();
+        entity().create();
+        entity().loginTry("root");
+        }
+        catch(Exception e){
+            System.out.println("algo correu mal");
+        }
+    	
     	
 
      

@@ -33,7 +33,7 @@ public class MainEdit extends Menu {
 
 				
 		    });
-	if (system.getFileSystem().getWorkDirectory().getSize()==3){
+	if (system.getFileSystem().getWorkDirectory().getListDir().size()<=1){
 		entry(2).invisible();
 		entry(3).invisible();
 		entry(4).invisible();

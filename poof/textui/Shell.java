@@ -31,6 +31,7 @@ public class Shell {
         ParseFile text=new ParseFile();
         try{
         system.getFileSystem().changeFileSystem(text.parse(System.getProperty("import")));
+        system.loginTry("root");
         }
         catch(Exception e){
             System.out.println("algo correu mal");
@@ -42,6 +43,12 @@ public class Shell {
 
     }
     else{
+        try{
+        system.loginTry("root");
+        }
+        catch(Exception e){
+            System.out.println("algo correu mal");
+        }
 	   Menu menu = new MainEdit(system);
 	   menu.open();
 	   IO.close();
