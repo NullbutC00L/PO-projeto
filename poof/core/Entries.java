@@ -28,6 +28,14 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
 
     private String _owner;
 
+
+
+    /**
+    * tipo de entrie
+    */
+
+    private String _type;
+
 	/**
     * Constructor.
     * 
@@ -35,11 +43,12 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     * @param perm e a permissao do ficheiro/directorio.
     * 
     */
-	public Entries(String name,String user ,boolean perm)
+	public Entries(String name,String user ,String type,boolean perm)
 	{
 		_name=name;
 		_permission=perm;
         _owner=user;
+        _type=type;
 	}
 
     /**
@@ -105,6 +114,18 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
 
     public String getOwner(){
         return _owner;
+    }
+
+
+     /**
+    * getType vai retornar o tipo da entrie
+    * 
+    * @return String do tipo
+    * 
+    */
+
+    public String getType(){
+        return _type;
     }
 
     /**

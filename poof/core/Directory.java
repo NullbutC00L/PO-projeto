@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import poof.textui.exception.EntryUnknownException;
-
+import poof.textui.exception.IsNotFileException;
 
 public class Directory extends Entries implements Serializable{
 
@@ -36,6 +36,16 @@ public class Directory extends Entries implements Serializable{
     */
     private Map<String, Files> _files= new HashMap<String, Files>();
 
+
+    /**
+    * lista de entries
+    */
+    private Map<String, Entries> _entries= new HashMap<String, Entries>();
+
+
+
+   
+
     
 
 
@@ -48,7 +58,7 @@ public class Directory extends Entries implements Serializable{
 
 	public Directory (String dir,Directory father,String user, boolean permission){
 		
-		super(dir,user,permission);
+		super(dir,user,"Directory",permission);
         
 		_fatherDir=father;
 		
@@ -65,6 +75,7 @@ public class Directory extends Entries implements Serializable{
 
 	public void createSubDir(String name){
 		_dirs.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
+        _entries.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
         _size+=1;
 
 
@@ -79,6 +90,7 @@ public class Directory extends Entries implements Serializable{
 
 	public void createFile(String name){
 			_files.put( name,new Files(name,this.getOwner(),this.getPermission()));
+             _entries.put( name,new Files(name,this.getOwner(),this.getPermission()));
             _size+=1;
 
 	}
@@ -117,9 +129,13 @@ public class Directory extends Entries implements Serializable{
 
 
 
-    public Files getFile(String name) throws EntryUnknownException{
-      if( _files.get(name)!=null){
-        return _files.get(name);
+    public Files getFile(String name) throws EntryUnknownException,IsNotFileException{
+      if( _entries.get(name)!=null){
+            if (_entries.get(name).getType().equals("File"))
+
+                return _files.get(name);
+            else 
+                throw new IsNotFileException(name);
       }
       else  
         throw new EntryUnknownException( name);
@@ -223,6 +239,7 @@ public class Directory extends Entries implements Serializable{
     */
 
     public void addElement(String name,Directory dir){
+            _entries.put(name,dir);
             _dirs.put(name,dir);
             _size+=1;
         }
@@ -234,6 +251,7 @@ public class Directory extends Entries implements Serializable{
     */
 
     public void removeValue(String name){
+        _entries.remove(name);
         _dirs.remove(name);
         _size-=1;
     }
@@ -268,6 +286,10 @@ public class Directory extends Entries implements Serializable{
         }
 
     }
+
+
+
+
 
 
 

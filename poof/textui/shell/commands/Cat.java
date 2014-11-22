@@ -47,6 +47,8 @@ public class Cat extends Command<Shell> {
 
         f.parse();
         try{
+
+            
             d.addNewLine(entity().getFileSystem().getWorkDirectory().getFile(file.toString()).getText());
         }
 

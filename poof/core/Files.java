@@ -24,6 +24,8 @@ public class Files extends Entries implements Serializable{
 
 	private String _text;
 
+	
+
 
 	/**
     * Constructor.
@@ -34,7 +36,7 @@ public class Files extends Entries implements Serializable{
     */
 
 	public Files(String name,String owner ,boolean permission){
-		super(name,owner,permission);
+		super(name,owner,"File",permission);
 
 	}
 
