@@ -10,6 +10,7 @@ import java.util.HashSet;
 
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
+import poof.textui.exception.IsNotDirectoryException;
 
 public class Directory extends Entries implements Serializable{
 
@@ -141,6 +142,27 @@ public class Directory extends Entries implements Serializable{
         throw new EntryUnknownException( name);
 
     }
+
+
+    public boolean getDir(String name) throws EntryUnknownException,IsNotDirectoryException{
+      if( _entries.get(name)!=null){
+            if (_entries.get(name).getType().equals("Directory"))
+
+                return true;
+            else 
+                throw new IsNotDirectoryException(name);
+      }
+      else  
+        throw new EntryUnknownException( name);
+
+    }
+
+
+
+
+
+
+
 
 
     /**
