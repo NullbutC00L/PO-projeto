@@ -17,6 +17,7 @@ import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
 
 import poof.textui.exception.EntryUnknownException;
+import poof.textui.exception.IsNotFileException;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
 /**
@@ -48,11 +49,14 @@ public class Cat extends Command<Shell> {
         f.parse();
         try{
 
-            
+
             d.addNewLine(entity().getFileSystem().getWorkDirectory().getFile(file.toString()).getText());
         }
 
         catch(EntryUnknownException e){
+            d.addNewLine(e.getMessage());
+        }
+        catch(IsNotFileException e){
             d.addNewLine(e.getMessage());
         }
         finally{

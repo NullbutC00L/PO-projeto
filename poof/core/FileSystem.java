@@ -277,6 +277,17 @@ public class FileSystem implements Serializable{
 
 
 
+        public boolean isUser(String name) throws UserUnknownException{
+      if( _user.get(name)!=null){
+
+                return true;
+            
+      }
+      else  
+        throw new UserUnknownException( name);
+
+    }
+
    
 
 

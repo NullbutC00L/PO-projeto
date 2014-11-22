@@ -1,5 +1,6 @@
 package poof.core;
 import java.io.Serializable;
+import poof.textui.exception.AccessDeniedException;
 
 /**
 * Class User permite criar um User
@@ -63,11 +64,13 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public void changePermission(Entries entry, boolean permission){
-        if (entry.getName()==_userName){
-        entry.setPermission(permission);
-            }
-
+	public void changePermission(Entries entry, boolean permission)throws AccessDeniedException{
+        if (entry.getOwner().equals(_userName) ||_userName.equals("root")){
+            entry.setPermission(permission);
+           
+        }
+        else
+            throw new AccessDeniedException(_userName);
 	}
 
 	/**
@@ -79,11 +82,8 @@ public class User implements Serializable , Comparable< User>{
     */
 
 	public void changeOwner(Entries entry,String name){
-        /*
-            if( user.getName()==_userName){
-            entry.setName(owner);
-        }
-        */
+
+        entry.setName(name);
 
 	} 
     /**

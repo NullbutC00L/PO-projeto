@@ -144,13 +144,26 @@ public class Directory extends Entries implements Serializable{
     }
 
 
-    public boolean getDir(String name) throws EntryUnknownException,IsNotDirectoryException{
+    public boolean isDir(String name) throws EntryUnknownException,IsNotDirectoryException{
       if( _entries.get(name)!=null){
             if (_entries.get(name).getType().equals("Directory"))
 
                 return true;
             else 
                 throw new IsNotDirectoryException(name);
+      }
+      else  
+        throw new EntryUnknownException( name);
+
+    }
+
+
+
+    public Entries getEntries(String name) throws EntryUnknownException{
+      if( _entries.get(name)!=null){
+
+                return _entries.get(name);
+            
       }
       else  
         throw new EntryUnknownException( name);

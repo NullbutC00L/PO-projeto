@@ -41,9 +41,10 @@ public class SuperUser extends User implements Serializable{
     * @param permission e a permissao que queremos dar a um directorio/ficheiro
     * 
     */
-
+    @Override
 	public void changePermission(Entries entry, boolean permission){
           entry.setPermission(permission);
+          
 
 
 	}
