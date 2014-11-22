@@ -11,7 +11,7 @@ all:
 run:
 	java -jar $(PROJ).jar
 swing:
-	java -Dui=swing -jar $(PROJ).jar
+	java -Dui=swing poof.textui.Shell
 clean:
 	rm -f `find $(PROJ) pt -name "*.class"`
 	rm -f `find $(PROJ) pt . -name "*.jar"`

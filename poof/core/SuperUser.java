@@ -16,7 +16,7 @@ public class SuperUser extends User implements Serializable{
 	/**
     * Directorio atribuido ao super user
     */
-	Directory _dir;
+	
 
 
 	/**
@@ -31,7 +31,7 @@ public class SuperUser extends User implements Serializable{
 	public SuperUser(Directory father){
 		
 		super("Super User","root",father);
-        _dir=this.getDir();
+        
 		//_dir=new Directory("root",father,false);// aqui deve ser  subdirectory shit
     }
 	/**

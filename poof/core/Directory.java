@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
 
+import poof.textui.exception.EntryUnknownException;
 
 
 public class Directory extends Entries implements Serializable{
@@ -33,7 +34,7 @@ public class Directory extends Entries implements Serializable{
     /**
     * lista de ficheiros
     */
-    private List<Files> _files= new ArrayList<Files>();
+    private Map<String, Files> _files= new HashMap<String, Files>();
 
     
 
@@ -53,31 +54,6 @@ public class Directory extends Entries implements Serializable{
 		
 
 	}
-
-
-
-
-
-	/**
-    * getEntries  Devolve as varias entradas do directorio em causa.
-    * 
-    * @return entradas do directorio.
-    * 
-    */
-
-	public List<Entries> getEntries(){
-        List<Entries> entries=new ArrayList<Entries>();
-        List<Directory> list = new ArrayList<Directory>(_dirs.values());
-        entries.add(this);
-		entries.addAll(list);
-        entries.addAll(_files);
-        Collections.sort(entries);
-
-        return entries;
-
-
-	}
-
 
 
 	/**
@@ -102,7 +78,7 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createFile(String name){
-			_files.add( new Files(name,this.getOwner(),this.getPermission()));
+			_files.put( name,new Files(name,this.getOwner(),this.getPermission()));
             _size+=1;
 
 	}
@@ -126,7 +102,29 @@ public class Directory extends Entries implements Serializable{
     */
     public Map<String,Directory> getListDir(){
         return _dirs;
-    }  
+    } 
+
+
+     /**
+    * getListFile vai dar return do Hashmap de Files
+    * 
+    * @return HashMap Files
+    * 
+    */
+    public Map<String,Files> getListFile() {
+        return _files;
+    }   
+
+
+
+    public Files getFile(String name) throws EntryUnknownException{
+      if( _files.get(name)!=null){
+        return _files.get(name);
+      }
+      else  
+        throw new EntryUnknownException( name);
+
+    }
 
 
     /**
