@@ -51,8 +51,10 @@ public class Cd extends Command<Shell> {
         	System.out.println(file.toString());
         	if(file.toString().equals(".."))
         		{
-        		 entity().getFileSystem().jump
-        		 					(entity().getFileSystem().getWorkDirectory().getFather());
+                    if (entity().getFileSystem().getWorkDirectory().getFather()!=null){
+        		        entity().getFileSystem().jump
+        		 		(entity().getFileSystem().getWorkDirectory().getFather());
+                    }
 
         		}
         	else{
