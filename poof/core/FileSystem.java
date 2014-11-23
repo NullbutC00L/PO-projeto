@@ -54,11 +54,7 @@ public class FileSystem implements Serializable{
          _currentUser.getDir().setFather(_dir);
          
          _currentUser.getDir().setOwner("root");
-        
-       
         _user.put(_currentUser.getUserName(),_currentUser);
-        _path.add(_dir); //tou a criar o directorio principal
-        _path.add(_currentUser.getDir());  //acho que no super user se deve usar o comando subdir e nao o construtor.
         _dir.addElement(_currentUser.getUserName(),_user.get(_currentUser.getUserName()).getDir());
 
     }
@@ -174,10 +170,19 @@ public class FileSystem implements Serializable{
         if (_currentUser.getUserName().equals("root") ){
                 if(_user.get(user)==null){ 
             
-            
+            //System.out.println("olha esta merda"+ _dir);
+            _dir=_dir.getInitialPath();
+
+
+
             _user.put(user,new User(name,user,_dir));
             _user.get(user).getDir().setFather(_dir);
             _dir.addElement(user,_user.get(user).getDir());
+
+            _dir=_dir.getListDir().get(_currentUser.getUserName());
+
+
+
             
             //_dir.getListDir().put()
            

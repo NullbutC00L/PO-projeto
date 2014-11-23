@@ -45,12 +45,14 @@ public class Ls extends Command<Shell> {
           d.addNewLine("d "+u.getFather().permissionToString(u.getFather())+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
           
 
+         
 
 
         //System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
         if( entity().getFileSystem().getWorkDirectory().getOrder()!=null){
         for(Directory e: entity().getFileSystem().getWorkDirectory().getOrder()){
             int tamanho=(e.getSize())*8;
+            
 
             d.addNewLine("d "+e.permissionToString(e)+e.getOwner()+" "+tamanho+" "+e.getName());
         }

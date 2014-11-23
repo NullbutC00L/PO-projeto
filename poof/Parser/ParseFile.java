@@ -73,7 +73,7 @@ public class ParseFile {
   }
 
   private Entries createEntry(String path, String username, String permission, boolean isDir) {
- 
+  
     String[] args = path.split("/");
       
     Entries entry;
@@ -83,7 +83,8 @@ public class ParseFile {
     }
 
     //if (isDir) 
-      
+      _fileSystem.jump( _fileSystem.actualDir().getInitialPath());
+
 
     
       for(int i=2;i<args.length;i++){
@@ -112,11 +113,14 @@ public class ParseFile {
 
           ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.actualDir(),username);  //muda o owner para username
           ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.actualDir(),bool);     //muda a permission para o falor de bool (true=public , false=private)
-  
-        _fileSystem.jump( _fileSystem.actualDir().getInitialPath());    //volta ao diretorio inicial (/home)
-        
+          
        
 
+
+        _fileSystem.jump( _fileSystem.actualDir().getInitialPath());    //volta ao diretorio inicial (/home)
+        
+      
+ 
         
 
         

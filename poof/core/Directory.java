@@ -131,15 +131,20 @@ public class Directory extends Entries implements Serializable{
 
 
     public Files getFile(String name) throws EntryUnknownException,IsNotFileException{
-      if( _entries.get(name)!=null){
+       
+      if( _entries.get(name)!=null ){
+        System.out.println("getFile");
             if (_entries.get(name).getType().equals("File"))
 
                 return _files.get(name);
             else 
                 throw new IsNotFileException(name);
       }
-      else  
+      
+      else  {
+        System.out.println("getFile3");
         throw new EntryUnknownException( name);
+    }
 
     }
 

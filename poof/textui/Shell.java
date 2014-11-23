@@ -30,8 +30,10 @@ public class Shell {
     if (System.getProperty("import")!=null){
         ParseFile text=new ParseFile();
         try{
+            system.loginTry("root");
         system.getFileSystem().changeFileSystem(text.parse(System.getProperty("import")));
         system.loginTry("root");
+        
         }
         catch(Exception e){
             System.out.println("algo correu mal");

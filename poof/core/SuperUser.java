@@ -45,6 +45,7 @@ public class SuperUser extends User implements Serializable{
 	public void changePermission(Entries entry, boolean permission){
           entry.setPermission(permission);
           
+          
 
 
 	}

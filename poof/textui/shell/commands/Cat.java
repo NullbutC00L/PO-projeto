@@ -18,6 +18,7 @@ import poof.textui.shell.ShellEdit;
 
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
+
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
 /**
@@ -59,6 +60,7 @@ public class Cat extends Command<Shell> {
         catch(IsNotFileException e){
             d.addNewLine(e.getMessage());
         }
+       
         finally{
         d.display();
         
