@@ -132,17 +132,26 @@ public class FileSystem implements Serializable{
     }
 
     public void makeFile(String name)throws EntryExistsException,AccessDeniedException{
-            
-        if(!(_dir.getOwner().equals(_currentUser.getUserName())) 
-                || ! (_currentUser.getUserName().equals("root"))
-                     ||_dir.getPermission()==false ){
-            System.out.println("erro");
-            throw new AccessDeniedException(_currentUser.getUserName());
-        }
-        else if(_dir.getListFile().get(name)!=null){
-                    throw new EntryExistsException(name);
-                }
+        if(_dir.getListFile().get(name)!=null){
+            throw new EntryExistsException(name);
+        }   
+                    
+        else if( ! (_currentUser.getUserName().equals("root"))){
+                    if(!(_dir.getOwner().equals(_currentUser.getUserName()))){
+                        if(_dir.getPermission()==false){
+                            throw new AccessDeniedException(_currentUser.getUserName());
+                        }
+                    
 
+                        else{
+                            _dir.createFile(name);
+                        }
+                    }
+                    else{
+                        _dir.createFile(name);
+                    }
+        }
+            
         else{
             _dir.createFile(name);
         }
