@@ -6,7 +6,7 @@ import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
 import pt.utl.ist.po.ui.InputString;
-
+import pt.utl.ist.po.ui.InputBoolean;
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
 import poof.textui.main.Message;
@@ -38,9 +38,30 @@ public class Open extends Command<Shell> {
     @SuppressWarnings("nls")
     public final void execute() {
         Display d = new Display(title());
-    	entity().create();
-        try{
         Form f = new Form(title());
+        try{
+        if(entity().getFileSystem().getState()){
+
+            InputBoolean sav = new InputBoolean(f,Message.saveBeforeExit());
+            f.parse();
+
+            if(sav.toString().equals("sim")){            
+                if(entity().getName()==null){
+                    f= new Form(title());
+                    InputString name = new InputString(f,Message.newSaveAs());
+                    f.parse();
+                    Shell.save(name.toString(),entity());
+                    entity().setName(name.toString());
+                }
+                else{
+                    Shell.save(entity().getName(),entity());
+                }
+            }
+        }
+
+    	entity().create();
+        
+        f = new Form(title());
     	InputString file = new InputString(f,Message.openFile());
          
         f.parse();

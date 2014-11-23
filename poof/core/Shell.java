@@ -98,7 +98,8 @@ public class Shell implements Serializable{
     * 
     */
    public void copyState(Shell shell){
-    
+
+    setName(shell.getName());
     _system.setState();
     _system.setUser(shell.getFileSystem().getUsers());
     _system.setDir(shell.getFileSystem().getWorkDirectory());

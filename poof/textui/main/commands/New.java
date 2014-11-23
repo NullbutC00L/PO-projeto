@@ -8,7 +8,9 @@ import pt.utl.ist.po.ui.Form;
 
 import poof.core.Shell;
 import poof.textui.main.MenuEntry;
-
+import pt.utl.ist.po.ui.InputBoolean;
+import pt.utl.ist.po.ui.InputString;
+import poof.textui.main.Message;
 import poof.textui.main.MainEdit;
 
 
@@ -33,13 +35,34 @@ public class New extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+        Display d = new Display(title());
+        Form f = new Form(title());
         try{
+        if(entity().getFileSystem().getState()){
+
+            InputBoolean sav = new InputBoolean(f,Message.saveBeforeExit());
+            f.parse();
+
+            if(sav.toString().equals("sim")){            
+                if(entity().getName()==null){
+                    f= new Form(title());
+                    InputString name = new InputString(f,Message.newSaveAs());
+                    f.parse();
+                    Shell.save(name.toString(),entity());
+                    entity().setName(name.toString());
+                }
+                else{
+                    Shell.save(entity().getName(),entity());
+                }
+            }
+        }
         
         
         ((MainEdit)menu()).showOptionsNonEmptyEditor();
         entity().create();
         entity().loginTry("root");
         }
+
         catch(Exception e){
             System.out.println("algo correu mal");
         }

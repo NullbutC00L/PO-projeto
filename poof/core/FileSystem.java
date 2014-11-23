@@ -278,6 +278,7 @@ public class FileSystem implements Serializable{
     *
     */
     public void setCurrentUser(User user){
+        
         state=true;
         _dir=_dir.getInitialPath();
         _dir=_dir.getListDir().get(user.getUserName());

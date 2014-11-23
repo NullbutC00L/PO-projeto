@@ -33,7 +33,7 @@ public class Shell {
             system.loginTry("root");
         system.getFileSystem().changeFileSystem(text.parse(System.getProperty("import")));
         system.loginTry("root");
-        
+        system.getFileSystem().setState();
         }
         catch(Exception e){
             System.out.println("algo correu mal");
@@ -47,6 +47,7 @@ public class Shell {
     else{
         try{
         system.loginTry("root");
+        system.getFileSystem().setState();
         }
         catch(Exception e){
             System.out.println("algo correu mal");
