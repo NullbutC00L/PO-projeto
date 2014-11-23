@@ -42,8 +42,11 @@ public class Append extends Command<Shell> {
      		Form f=new Form(title());
 	     	InputString file = new InputString(f,Message.fileRequest());
 	    	f.parse();
-	    		entity().getFileSystem().checkUserFile(file.toString());
+
 		    	Files a= entity().getFileSystem().getWorkDirectory().getFile(file.toString());
+                 System.out.println("vou checkar");
+                entity().getFileSystem().checkUserFile(file.toString());
+                System.out.println("use check");
 
 		    	f=new Form(title());
 		    	file = new InputString(f,Message.textRequest());
