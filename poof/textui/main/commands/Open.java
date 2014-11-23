@@ -37,6 +37,7 @@ public class Open extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+        Display d = new Display(title());
     	entity().create();
         try{
         Form f = new Form(title());
@@ -61,10 +62,12 @@ public class Open extends Command<Shell> {
         
         }
         catch(IOException e){
-            e.printStackTrace();
+            d.addNewLine(Message.fileNotFound());
+            d.display();
         }
         catch(ClassNotFoundException e){
-            e.printStackTrace();
+            d.addNewLine(Message.fileNotFound());
+            d.display();
         }
 
        
