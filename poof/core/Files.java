@@ -13,11 +13,7 @@ import java.io.Serializable;
 public class Files extends Entries implements Serializable{
 
 
-	/**
-    * tamanho do ficheiro
-    */
-	private int _size;
-
+	
 	/**
     * texto do ficheiro
     */
@@ -36,22 +32,10 @@ public class Files extends Entries implements Serializable{
     */
 
 	public Files(String name,String owner ,boolean permission){
-		super(name,owner,"File",permission);
+		super(name,owner,"File",0,permission);
 
 	}
 
-	/**
-    * getSize obetem-se o tamanho do ficheiro
-    * 
-    * @return _size e o tamanho do ficheiro.
-    * 
-    */
-
-
-	public int getSize(){
-		_size=_text.length();
-		return _size;
-	}
 
 	
 
@@ -75,7 +59,7 @@ public class Files extends Entries implements Serializable{
     * 
     */
 	public void addToFile (String text) {
-
+		setSize(text.length());
 		_text+=text;
 		
 	}

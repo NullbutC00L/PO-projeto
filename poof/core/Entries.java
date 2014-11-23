@@ -28,7 +28,7 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
 
     private String _owner;
 
-
+    private int _size;
 
     /**
     * tipo de entrie
@@ -43,12 +43,13 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     * @param perm e a permissao do ficheiro/directorio.
     * 
     */
-	public Entries(String name,String user ,String type,boolean perm)
+	public Entries(String name,String user ,String type,int size,boolean perm)
 	{
 		_name=name;
 		_permission=perm;
         _owner=user;
         _type=type;
+        _size=size;
 	}
 
     /**
@@ -137,6 +138,57 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
 
     public void setOwner(String user){
         _owner=user;
+    }
+
+
+       /**
+    * getSize retorna o tamanho do directorio actual
+    * @return int do tamanho do directorio
+    * 
+    */
+
+    public int getSize(){
+        return _size;
+
+    }
+
+
+    public void setSize(int size){
+        _size+=size;
+    }
+
+       /**
+    * permissionToString vai fazer a traducao das permissoes de true/false para
+    * w ou - para poder imprimir
+    * @param Directory 
+    * @return String permissao traduzida para string 
+    * 
+    */
+
+    public String permissionToString( ){
+        String permission;
+        if (getPermission()==true){
+                permission=new String("w ");
+                return permission;
+        }
+        else{
+            permission=new String("- ");
+            return permission;
+        }
+
+    }
+
+    public String choseFileDir( ){
+        String permission;
+        if (getType().equals("Directory")){
+                permission=new String("d ");
+                return permission;
+        }
+        else{
+            permission=new String("- ");
+            return permission;
+        }
+
     }
 
 

@@ -37,24 +37,34 @@ public class Ls extends Command<Shell> {
     public final void execute() {
         Directory u = entity().getFileSystem().getWorkDirectory();
     	Display d = new Display(title());
-   
+    int tamanho;
 
 
-          d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
-
-          d.addNewLine("d "+u.getFather().permissionToString(u.getFather())+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
-          
+          d.addNewLine("d "+u.permissionToString()+u.getName()+" "+(u.getSize())*8+" .");
+          if (u.getName().equals("home")){
+            d.addNewLine("d "+ "- " + "/ "+ 8 +" ..");
+          }
+          else{
+            d.addNewLine("d "+u.getFather().permissionToString()
+                +u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
+          }
 
          
 
 
-        //System.out.println(entity().getFileSystem().getCurrentUser().getDir().getEntries());
+        
         if( entity().getFileSystem().getWorkDirectory().getOrder()!=null){
-        for(Directory e: entity().getFileSystem().getWorkDirectory().getOrder()){
-            int tamanho=(e.getSize())*8;
+        for(Entries e: entity().getFileSystem().getWorkDirectory().getOrder()){
+            if (e.getType().equals("Directory")){
+             tamanho=(e.getSize())*8;
+            }
+            else{
+              tamanho=e.getSize();
+            }
             
 
-            d.addNewLine("d "+e.permissionToString(e)+e.getOwner()+" "+tamanho+" "+e.getName());
+            d.addNewLine(e.choseFileDir()+e.permissionToString()+e.getOwner()+" "+tamanho+" "+e.getName());
+          
         }
         }
         d.display();  

@@ -15,7 +15,7 @@ import poof.textui.exception.IsNotDirectoryException;
 public class Directory extends Entries implements Serializable{
 
 
-	private int _size=2;
+	
 
 
     /**
@@ -59,7 +59,7 @@ public class Directory extends Entries implements Serializable{
 
 	public Directory (String dir,Directory father,String user, boolean permission){
 		
-		super(dir,user,"Directory",permission);
+		super(dir,user,"Directory",2,permission);
         
 		_fatherDir=father;
 		
@@ -77,7 +77,7 @@ public class Directory extends Entries implements Serializable{
 	public void createSubDir(String name){
 		_dirs.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
         _entries.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
-        _size+=1;
+        setSize(1);
 
 
 	}
@@ -92,7 +92,7 @@ public class Directory extends Entries implements Serializable{
 	public void createFile(String name){
 			_files.put( name,new Files(name,this.getOwner(),this.getPermission()));
              _entries.put( name,new Files(name,this.getOwner(),this.getPermission()));
-            _size+=1;
+            setSize(1);
 
 	}
 
@@ -190,12 +190,17 @@ public class Directory extends Entries implements Serializable{
     * 
     */
 
-    public List<Directory> getOrder(){
+    public List<Entries> getOrder(){
     
         List<Directory> list = new ArrayList<Directory>(_dirs.values());
-        
+        List<Files> list1 = new ArrayList<Files>(_files.values());
+        List<Entries> listFinal = new ArrayList<Entries>();
+                
         Collections.sort(list);
-        return list;
+        Collections.sort(list1);
+        listFinal.addAll(list);
+        listFinal.addAll(list1);
+        return listFinal;
     }
         /**
     * getFather vai retornar o Directorio Pai de um determinado Directorio
@@ -281,7 +286,7 @@ public class Directory extends Entries implements Serializable{
     public void addElement(String name,Directory dir){
             _entries.put(name,dir);
             _dirs.put(name,dir);
-            _size+=1;
+            setSize(1);
         }
 
     /**
@@ -293,39 +298,11 @@ public class Directory extends Entries implements Serializable{
     public void removeValue(String name){
         _entries.remove(name);
         _dirs.remove(name);
-        _size-=1;
+        setSize(-1);
     }
-        /**
-    * getSize retorna o tamanho do directorio actual
-    * @return int do tamanho do directorio
-    * 
-    */
+     
 
-    public int getSize(){
-        return _size;
-
-    }
-
-    /**
-    * permissionToString vai fazer a traducao das permissoes de true/false para
-    * w ou - para poder imprimir
-    * @param Directory 
-    * @return String permissao traduzida para string 
-    * 
-    */
-
-    public String permissionToString(Directory u ){
-        String permission;
-        if (u.getPermission()==true){
-                permission=new String("w ");
-                return permission;
-        }
-        else{
-            permission=new String("- ");
-            return permission;
-        }
-
-    }
+ 
 
 
 
