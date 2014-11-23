@@ -22,7 +22,7 @@ public class Files extends Entries implements Serializable{
     * texto do ficheiro
     */
 
-	private String _text;
+	private String _text =new String ("");
 
 	
 

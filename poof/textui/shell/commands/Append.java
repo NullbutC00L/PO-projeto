@@ -1,3 +1,4 @@
+
 package poof.textui.shell.commands;
 
 
@@ -41,7 +42,7 @@ public class Append extends Command<Shell> {
      		Form f=new Form(title());
 	     	InputString file = new InputString(f,Message.fileRequest());
 	    	f.parse();
-	    		entity().getFileSystem().checkUser(entity().getFileSystem().getCurrentUser().getUserName());
+	    		entity().getFileSystem().checkUserFile(file.toString());
 		    	Files a= entity().getFileSystem().getWorkDirectory().getFile(file.toString());
 
 		    	f=new Form(title());

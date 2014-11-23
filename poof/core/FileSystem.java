@@ -97,16 +97,55 @@ public class FileSystem implements Serializable{
 	}
 
 	
-    /**
+     /**
     *   makeDir cria um subdirectorio do directorio actual
     *   @param recebe uma string que sera o nome do novo directorio
     *
     */
-    public void makeDir(String name){
+    public void makeDir(String name)throws EntryExistsException,AccessDeniedException{
+                if(_dir.getListDir().get(name)!=null|| name.equals(".")||name.equals("..")){
+                    throw new EntryExistsException(name);
+                }
 
-        
+                else if (! (_currentUser.getUserName().equals("root")) ){
+                    if(!(_dir.getOwner().equals(_currentUser.getUserName()))){
+                        if(_dir.getPermission()==false){
+                            throw new AccessDeniedException(_currentUser.getUserName());
+                        }
+                         else{
+                            _dir.createSubDir(name);
+                         }
+
+
+                    }
+                    else{
+                        _dir.createSubDir(name);
+                    }
+
+
+                }
+
+                 
+                else{
                 _dir.createSubDir(name);
+                }
+    }
+
+    public void makeFile(String name)throws EntryExistsException,AccessDeniedException{
             
+        if(!(_dir.getOwner().equals(_currentUser.getUserName())) 
+                || ! (_currentUser.getUserName().equals("root"))
+                     ||_dir.getPermission()==false ){
+            System.out.println("erro");
+            throw new AccessDeniedException(_currentUser.getUserName());
+        }
+        else if(_dir.getListFile().get(name)!=null){
+                    throw new EntryExistsException(name);
+                }
+
+        else{
+            _dir.createFile(name);
+        }
     }
 
 
@@ -295,12 +334,14 @@ public class FileSystem implements Serializable{
 
    
 
-    public void checkUser(String user)throws AccessDeniedException{
-        if(getCurrentUser().getUserName().equals(user)||getCurrentUser().getUserName().equals("root")){
+    public void checkUserFile(String file)throws AccessDeniedException{
+        if(_dir.getListFile().get(file).getOwner().equals(_currentUser.getUserName())
+            ||getCurrentUser().getUserName().equals("root") 
+                ||_dir.getListFile().get(file).getPermission()==true){
 
         }
         else{
-            throw new AccessDeniedException(user);
+            throw new AccessDeniedException(_currentUser.getUserName());
         }
 
 
