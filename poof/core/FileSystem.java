@@ -340,9 +340,9 @@ public class FileSystem implements Serializable{
     public void checkUserFile(String file)throws AccessDeniedException{
 
          
-        if(_dir.getListFile().get(file).getOwner().equals(_currentUser.getUserName())
+        if(_dir.getListEntries().get(file).getOwner().equals(_currentUser.getUserName())
             ||getCurrentUser().getUserName().equals("root") 
-                ||_dir.getListFile().get(file).getPermission()==true){
+                ||_dir.getListEntries().get(file).getPermission()==true){
 
         }
         else{
@@ -351,6 +351,9 @@ public class FileSystem implements Serializable{
 
 
     }
+
+
+
 
 
 

@@ -11,6 +11,7 @@ import java.util.HashSet;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
 import poof.textui.exception.IsNotDirectoryException;
+import poof.textui.exception.IllegalRemovalException;
 
 public class Directory extends Entries implements Serializable{
 
@@ -126,6 +127,16 @@ public class Directory extends Entries implements Serializable{
     */
     public Map<String,Files> getListFile() {
         return _files;
+    }   
+
+     /**
+    * getListEntrie vai dar return do Hashmap de entries
+    * 
+    * @return HashMap entries
+    * 
+    */
+    public Map<String,Entries> getListEntries() {
+        return _entries;
     }   
 
 
@@ -303,6 +314,28 @@ public class Directory extends Entries implements Serializable{
      
 
  
+    public void remove(Entries entry)throws IllegalRemovalException{
+        if (entry.getType().equals("File")){
+             _entries.remove(entry.getName());
+            _files.remove(entry.getName());
+            setSize(-1);
+        }
+        else{
+
+            _entries.remove(entry.getName());
+            _dirs.remove(entry.getName());
+            setSize(-1);
+
+
+        }
+
+    }
+
+    public void ilegal(String ilegal)throws IllegalRemovalException{
+        if(ilegal.equals(".")||ilegal.equals("..")){
+            throw new IllegalRemovalException();
+        }
+    }
 
 
 

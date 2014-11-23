@@ -1,16 +1,18 @@
 package poof.textui.shell.commands;
 
 
-
+import pt.utl.ist.po.ui.InputString;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
-
-import poof.core.Shell;
+import poof.core.*;
+import poof.textui.shell.Message;
 import poof.textui.shell.MenuEntry;
 
 import poof.textui.shell.ShellEdit;
-
+import poof.textui.exception.EntryUnknownException;
+import poof.textui.exception.AccessDeniedException;
+import poof.textui.exception.IllegalRemovalException;
 
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
@@ -33,6 +35,41 @@ public class Rm extends Command<Shell> {
     @Override
     @SuppressWarnings("nls")
     public final void execute() {
+
+
+        Display d = new Display(title());
+        Form f = new Form(title());
+        
+        
+        InputString file = new InputString(f,Message.nameRequest());
+
+        f.parse();
+        try{
+        	Entries entry;
+        	entity().getFileSystem().getWorkDirectory().ilegal(file.toString());
+        	entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString());
+        	entity().getFileSystem().checkUserFile(entry.getName());
+        	entity().getFileSystem().getWorkDirectory().remove(entry);
+
+
+
+
+        }
+
+        catch(EntryUnknownException e){
+            d.addNewLine(e.getMessage());
+        }
+        catch(AccessDeniedException e){
+            d.addNewLine(e.getMessage());
+        }
+         catch(IllegalRemovalException e){
+            d.addNewLine(e.getMessage());
+        }
+       
+        finally{
+        d.display();
+        
+        }
      
 
        
