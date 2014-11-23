@@ -65,12 +65,14 @@ public class User implements Serializable , Comparable< User>{
     */
 
 	public void changePermission(Entries entry, boolean permission)throws AccessDeniedException{
+
         if (entry.getOwner().equals(_userName) ||_userName.equals("root")){
             entry.setPermission(permission);
            
         }
-        else
+        else{
             throw new AccessDeniedException(_userName);
+        }
 	}
 
 	/**
@@ -81,9 +83,15 @@ public class User implements Serializable , Comparable< User>{
     * 
     */
 
-	public void changeOwner(Entries entry,String name){
-
-        entry.setName(name);
+	public void changeOwner(Entries entry,String name)throws AccessDeniedException{
+    if (entry.getOwner().equals(_userName) ||_userName.equals("root")){
+            entry.setOwner(name);
+           
+        }
+        else{
+            throw new AccessDeniedException(_userName);
+        }
+        
 
 	} 
     /**

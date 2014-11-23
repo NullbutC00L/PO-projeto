@@ -11,6 +11,7 @@ import poof.core.Shell;
 import poof.core.FileSystem;
 import poof.core.Directory;
 import poof.core.Files;
+import poof.core.Entries;
 
 import poof.textui.shell.MenuEntry;
 import poof.textui.shell.Message;
@@ -40,11 +41,12 @@ public class LsEntry extends Command<Shell> {
     @SuppressWarnings("nls")
     public final void execute() {
 
-/*
+
 
         Display d = new Display(title());
         Form f = new Form(title());
         String type;
+        int tamanho;
          Directory u = entity().getFileSystem().getWorkDirectory();
         
         
@@ -52,25 +54,13 @@ public class LsEntry extends Command<Shell> {
 
         f.parse();
         try{
-        	 type = entity().getFileSystem().getWorkDirectory().getEntries(file.toString()).getType();
+          Entries entry;
+          entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString());
+           if (entry.getType().equals("File"))
+           {
 
 
-          d.addNewLine("d "+u.permissionToString(u)+u.getName()+" "+(u.getSize())*8+" .");
-
-          d.addNewLine("d "+u.getFather().permissionToString(u.getFather())+u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
-
-          if (type.equals("Directory")){
-          	 int tamanho=(u.getListDir().get(f.toString()).getSize())*8;
-          	d.addNewLine("d "+u.getListDir().get(f.toString()).permissionToString(u)
-          				+u.getListDir().get(f.toString()).getOwner()+" "+tamanho+" "+u.getListDir().get(f.toString()).getName());
-     	 }	
-
-     	 else{
-
-
-     	 }
-
-
+           }
 
 
 
@@ -79,9 +69,7 @@ public class LsEntry extends Command<Shell> {
         catch(EntryUnknownException e){
             d.addNewLine(e.getMessage());
         }
-        catch(IsNotFileException e){
-            d.addNewLine(e.getMessage());
-        }
+        
         finally{
         d.display();
         
@@ -90,7 +78,7 @@ public class LsEntry extends Command<Shell> {
 
        
         
-*/
+
         
     }
 }

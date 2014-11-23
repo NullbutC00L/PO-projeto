@@ -46,8 +46,8 @@ public class Rm extends Command<Shell> {
         f.parse();
         try{
         	Entries entry;
-        	entity().getFileSystem().getWorkDirectory().ilegal(file.toString());
-        	entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString());
+        	entity().getFileSystem().getWorkDirectory().ilegal(file.toString());  // ve se e . ou ..
+        	entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString()); //obtem a entry
         	entity().getFileSystem().checkUserFile(entry.getName());
         	entity().getFileSystem().getWorkDirectory().remove(entry);
 
