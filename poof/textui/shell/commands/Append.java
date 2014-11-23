@@ -5,12 +5,14 @@ package poof.textui.shell.commands;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
 import pt.utl.ist.po.ui.Form;
-
-import poof.core.Shell;
+import pt.utl.ist.po.ui.InputString;
+import poof.core.*;
 import poof.textui.shell.MenuEntry;
-
+import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
-
+import poof.textui.exception.EntryUnknownException;
+import poof.textui.exception.IsNotFileException;
+import poof.textui.exception.AccessDeniedException;
 
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
@@ -32,12 +34,37 @@ public class Append extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
-     
+    public final void execute(){
+     	 Display d = new Display(title());
+     	try{
+            
+     		Form f=new Form(title());
+	     	InputString file = new InputString(f,Message.fileRequest());
+	    	f.parse();
+	    		entity().getFileSystem().checkUser(entity().getFileSystem().getCurrentUser().getUserName());
+		    	Files a= entity().getFileSystem().getWorkDirectory().getFile(file.toString());
 
-       
+		    	f=new Form(title());
+		    	file = new InputString(f,Message.textRequest());
+		    	f.parse();
+		    	a.addToFile(file.toString());
+		    	System.out.println(a.getText());
+	  
         
-
+    	}
+    	catch(EntryUnknownException e){
+    		d.addNewLine(e.getMessage());
+    	}
+    	catch(IsNotFileException e){
+    		d.addNewLine(e.getMessage());
+    	}
+    	catch(AccessDeniedException e){
+    		d.addNewLine(e.getMessage());
+    	}
+         finally{
+        d.display();
+        
+        }
         
     }
 }

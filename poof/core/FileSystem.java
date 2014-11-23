@@ -295,8 +295,16 @@ public class FileSystem implements Serializable{
 
    
 
+    public void checkUser(String user)throws AccessDeniedException{
+        if(getCurrentUser().getUserName().equals(user)||getCurrentUser().getUserName().equals("root")){
+
+        }
+        else{
+            throw new AccessDeniedException(user);
+        }
 
 
+    }
 
 
 

@@ -142,7 +142,7 @@ public class Directory extends Entries implements Serializable{
       }
       
       else  {
-        System.out.println("getFile3");
+        
         throw new EntryUnknownException( name);
     }
 
