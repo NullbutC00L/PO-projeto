@@ -99,8 +99,10 @@ public class Shell implements Serializable{
     */
    public void copyState(Shell shell){
     
-
+    _system.setState();
     _system.setUser(shell.getFileSystem().getUsers());
+    _system.setDir(shell.getFileSystem().getWorkDirectory());
+    _system.setCurrentUserOpen(shell.getFileSystem().getCurrentUser());
         
    }
     
@@ -118,7 +120,7 @@ public class Shell implements Serializable{
                 if(_system.getUsers().get(log)!=null){
                     
                     _system.setCurrentUser(_system.getUsers().get(log));
-                    _system.setWorkDirectory(_system.getUsers().get(log));
+                    
                     return;
                 }
             
@@ -147,6 +149,10 @@ public class Shell implements Serializable{
     {
         return _name;
     }
+
+
+
+
     
 
 

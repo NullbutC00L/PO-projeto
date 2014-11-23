@@ -23,7 +23,7 @@ import poof.textui.exception.*;
 
 
 public class FileSystem implements Serializable{
-    
+    private boolean state=false;
      /**
     * Objecto Directorio inicial Existente
     */
@@ -50,7 +50,7 @@ public class FileSystem implements Serializable{
     *
     */
     public FileSystem(){
-       
+        
          _currentUser.getDir().setFather(_dir);
          
          _currentUser.getDir().setOwner("root");
@@ -103,6 +103,7 @@ public class FileSystem implements Serializable{
     *
     */
     public void makeDir(String name)throws EntryExistsException,AccessDeniedException{
+
                 if(_dir.getListDir().get(name)!=null|| name.equals(".")||name.equals("..")){
                     throw new EntryExistsException(name);
                 }
@@ -113,12 +114,14 @@ public class FileSystem implements Serializable{
                             throw new AccessDeniedException(_currentUser.getUserName());
                         }
                          else{
+                            state=true;
                             _dir.createSubDir(name);
                          }
 
 
                     }
                     else{
+                        state=true;
                         _dir.createSubDir(name);
                     }
 
@@ -127,7 +130,8 @@ public class FileSystem implements Serializable{
 
                  
                 else{
-                _dir.createSubDir(name);
+                    state=true;
+                    _dir.createSubDir(name);
                 }
     }
 
@@ -144,15 +148,18 @@ public class FileSystem implements Serializable{
                     
 
                         else{
+                            state=true;
                             _dir.createFile(name);
                         }
                     }
                     else{
+                        state=true;
                         _dir.createFile(name);
                     }
         }
             
         else{
+            state=true;
             _dir.createFile(name);
         }
     }
@@ -166,6 +173,7 @@ public class FileSystem implements Serializable{
     *
     */
     public void removeDirectory(){
+        state=true;
         _dir=_dir.getFather();
     }
 
@@ -217,26 +225,19 @@ public class FileSystem implements Serializable{
     public void createUser(String user,String name) throws AccessDeniedException,UserExistsException {
         if (_currentUser.getUserName().equals("root") ){
                 if(_user.get(user)==null){ 
+                    state=true;
             
-            //System.out.println("olha esta merda"+ _dir);
-            _dir=_dir.getInitialPath();
-
-
-
-            _user.put(user,new User(name,user,_dir));
-            _user.get(user).getDir().setFather(_dir);
-            _dir.addElement(user,_user.get(user).getDir());
-
-            _dir=_dir.getListDir().get(_currentUser.getUserName());
-
-
-
             
-            //_dir.getListDir().put()
-           
+                    _dir=_dir.getInitialPath();
 
 
 
+                    _user.put(user,new User(name,user,_dir));
+                    _user.get(user).getDir().setFather(_dir);
+                    _dir.addElement(user,_user.get(user).getDir());
+
+                    _dir=_dir.getListDir().get(_currentUser.getUserName());
+                   
             }
             else
                 throw new UserExistsException(user);
@@ -258,17 +259,7 @@ public class FileSystem implements Serializable{
 
         
     }
-    /**
-    *   setWorkDirectory apaga o directorio actual do fileSystem e vai abrir o 
-    *   o directorio de trabalho do User passado
-    *   @param  User 
-    */
-
-    public void setWorkDirectory(User user){
-        _path.clear();
-        _path.add(_dir);
-        _path.add(user.getDir());
-    }
+ 
     /**
     *   changeFileSystem vai mudar todos os atributos do Filesystem actual pelos
     *   atributos do novo Filesystem, passando assim o Filesystem actual a ser
@@ -287,6 +278,7 @@ public class FileSystem implements Serializable{
     *
     */
     public void setCurrentUser(User user){
+        state=true;
         _dir=_dir.getInitialPath();
         _dir=_dir.getListDir().get(user.getUserName());
         
@@ -325,6 +317,7 @@ public class FileSystem implements Serializable{
     * 
     */
     public void jump(Directory dir){
+        state=true;
         _dir=dir;
     }
 
@@ -355,6 +348,28 @@ public class FileSystem implements Serializable{
 
 
     }
+
+
+
+
+    public void setState(){
+        state=false;
+    }
+
+
+    public boolean getState(){
+        return state;
+    }
+
+    public void setDir(Directory dir){
+        _dir=dir;
+
+    }
+
+    public void setCurrentUserOpen(User user){
+        _currentUser=user;
+    }
+
 
 
 
