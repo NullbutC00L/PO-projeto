@@ -56,14 +56,32 @@ public class LsEntry extends Command<Shell> {
         try{
           Entries entry;
           entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString());
-           if (entry.getType().equals("File"))
-           {
+          if (entry.getType().equals("File"))
+          {
+              tamanho=entry.getSize();
+              d.addNewLine(entry.choseFileDir()+entry.permissionToString()
+                  +entry.getOwner()+" "+tamanho+" "+entry.getName());
 
+          }
+          else{
+            entity().getFileSystem().jump(u.nextDir(file.toString()));
+            d.addNewLine("d "+u.permissionToString()+u.getName()+" "+(u.getSize())*8+" .");
+            if (u.getName().equals("home")){
+              d.addNewLine("d "+ "- " + "/ "+ 8 +" ..");
+            }
+            else{
+              d.addNewLine("d "+u.getFather().permissionToString()
+             +u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
+            }
 
-           }
+            for(Entries e: entity().getFileSystem().getWorkDirectory().getOrder()){
 
-
-
+              tamanho=(e.getSize())*8;
+              d.addNewLine(e.choseFileDir()+e.permissionToString()+e.getOwner()+" "+tamanho+" "+e.getName());
+            } 
+            entity().getFileSystem().jump
+                (entity().getFileSystem().getWorkDirectory().getFather());
+          }
         }
 
         catch(EntryUnknownException e){
@@ -73,10 +91,7 @@ public class LsEntry extends Command<Shell> {
         finally{
         d.display();
         
-        }
-     
-
-       
+        } 
         
 
         
