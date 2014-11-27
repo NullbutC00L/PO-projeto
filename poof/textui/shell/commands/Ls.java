@@ -40,7 +40,7 @@ public class Ls extends Command<Shell> {
     int tamanho;
 
 
-          d.addNewLine("d "+u.permissionToString()+u.getName()+" "+(u.getSize())*8+" .");
+          d.addNewLine("d "+u.permissionToString()+u.getOwner()+" "+(u.getSize())*8+" .");
           if (u.getName().equals("home")){
             d.addNewLine("d "+ "- " + "/ "+ 8 +" ..");
           }

@@ -52,7 +52,7 @@ public class Append extends Command<Shell> {
 		    	file = new InputString(f,Message.textRequest());
 		    	f.parse();
 		    	a.addToFile(file.toString());
-		    	System.out.println(a.getText());
+		    	System.out.println(a.getText()+"\n");
 	  
         
     	}

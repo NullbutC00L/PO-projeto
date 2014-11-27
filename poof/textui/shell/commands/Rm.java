@@ -49,6 +49,7 @@ public class Rm extends Command<Shell> {
         	entity().getFileSystem().getWorkDirectory().ilegal(file.toString());  // ve se e . ou ..
         	entry=entity().getFileSystem().getWorkDirectory().getEntries(file.toString()); //obtem a entry
         	entity().getFileSystem().checkUserFile(entry.getName());
+            entity().getFileSystem().checkIsMyDir(entry.getName());
         	entity().getFileSystem().getWorkDirectory().remove(entry);
 
 
@@ -57,13 +58,13 @@ public class Rm extends Command<Shell> {
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
         }
         catch(AccessDeniedException e){
-            d.addNewLine(e.getMessage());
+             d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
         }
          catch(IllegalRemovalException e){
-            d.addNewLine(e.getMessage());
+             d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
         }
        
         finally{
