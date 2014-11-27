@@ -103,7 +103,9 @@ public class FileSystem implements Serializable{
     }
 
     public void makeFile(String name)throws EntryExistsException,AccessDeniedException{
-        if(_dir.getListFile().get(name)!=null){
+
+        
+        if(_dir.getListEntries().get(name)!=null){
             throw new EntryExistsException(name);
         }   
                     

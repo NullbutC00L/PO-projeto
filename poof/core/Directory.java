@@ -88,7 +88,7 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createFile(String name,String owner){
-			_files.put( name,new Files(name,owner,this.getPermission()));
+			_files.put( name,new Files(name,owner,false));
              
             setSize(1);
 

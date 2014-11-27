@@ -44,11 +44,11 @@ public class Touch extends Command<Shell> {
     	entity().getFileSystem().makeFile(file.toString());
         }
         catch(AccessDeniedException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Criar ficheiro: Operação inválida: "+e.getMessage());
             d.display();
         }
         catch(EntryExistsException e){
-            d.addNewLine(e.getMessage());
+           d.addNewLine("Criar ficheiro: Operação inválida: "+e.getMessage());
             d.display();
         }
 
