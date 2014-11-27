@@ -39,10 +39,7 @@ public class Directory extends Entries implements Serializable{
     private Map<String, Files> _files= new HashMap<String, Files>();
 
 
-    /**
-    * lista de entries
-    */
-    private Map<String, Entries> _entries= new HashMap<String, Entries>();
+    
 
 
 
@@ -77,7 +74,7 @@ public class Directory extends Entries implements Serializable{
 
 	public void createSubDir(String name){
 		_dirs.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
-        _entries.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
+        
         setSize(1);
 
 
@@ -92,7 +89,7 @@ public class Directory extends Entries implements Serializable{
 
 	public void createFile(String name){
 			_files.put( name,new Files(name,this.getOwner(),this.getPermission()));
-             _entries.put( name,new Files(name,this.getOwner(),this.getPermission()));
+             
             setSize(1);
 
 	}
@@ -129,15 +126,7 @@ public class Directory extends Entries implements Serializable{
         return _files;
     }   
 
-     /**
-    * getListEntrie vai dar return do Hashmap de entries
-    * 
-    * @return HashMap entries
-    * 
-    */
-    public Map<String,Entries> getListEntries() {
-        return _entries;
-    }   
+     
 
 
 
@@ -299,7 +288,7 @@ public class Directory extends Entries implements Serializable{
     */
 
     public void addElement(String name,Directory dir){
-            _entries.put(name,dir);
+            
             _dirs.put(name,dir);
             setSize(1);
         }
@@ -310,13 +299,13 @@ public class Directory extends Entries implements Serializable{
  
     public void remove(Entries entry)throws IllegalRemovalException{
         if (entry.getType().equals("File")){
-             _entries.remove(entry.getName());
+            
             _files.remove(entry.getName());
             setSize(-1);
         }
         else{
 
-            _entries.remove(entry.getName());
+            
             _dirs.remove(entry.getName());
             setSize(-1);
 
