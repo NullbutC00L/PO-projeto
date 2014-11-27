@@ -64,24 +64,6 @@ public class FileSystem implements Serializable{
     }
 
 
-
-
-	/**
-    * list lista todos os utilizadores.
-    * 
-    * @return um Map de Users.
-    * 
-    */
-
-	public Map<String,User> list(){
-        return _user;
-       
-
-	}
-
-	
-
-	
      /**
     *   makeDir cria um subdirectorio do directorio actual
     *   @param recebe uma string que sera o nome do novo directorio
@@ -276,16 +258,7 @@ public class FileSystem implements Serializable{
     public Map<String,User> getUsers(){
         return _user;
     }
-        /**
-    * Desvolve o Direcotorio actual
-    * 
-    * @return Directory
-    * 
-    */
-    public Directory actualDir()
-    {
-        return _dir;
-    }
+    
     /**
     *   vai saltar para um Directory que foi passado  no parametro
     *   o directorio vai passar a ser o directorio passado
