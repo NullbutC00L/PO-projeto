@@ -126,15 +126,27 @@ public class Directory extends Entries implements Serializable{
         return _files;
     }   
 
-     
+     /**
+    * getListEntrie vai dar return do Hashmap de entries
+    * 
+    * @return HashMap entries
+    * 
+    */
+    public Map<String,Entries> getListEntries() {
+
+        Map<String, Entries> entries= new HashMap<String, Entries>();
+         entries.putAll(_files);
+         entries.putAll(_dirs);
+        return entries;
+    }   
 
 
 
     public Files getFile(String name) throws EntryUnknownException,IsNotFileException{
        
-      if( _entries.get(name)!=null ){
+      if( getListEntries().get(name)!=null ){
         System.out.println("getFile");
-            if (_entries.get(name).getType().equals("File"))
+            if (getListEntries().get(name).getType().equals("File"))
 
                 return _files.get(name);
             else 
@@ -150,8 +162,8 @@ public class Directory extends Entries implements Serializable{
 
 
     public boolean isDir(String name) throws EntryUnknownException,IsNotDirectoryException{
-      if( _entries.get(name)!=null){
-            if (_entries.get(name).getType().equals("Directory"))
+      if( getListEntries().get(name)!=null){
+            if (getListEntries().get(name).getType().equals("Directory"))
 
                 return true;
             else 
@@ -165,13 +177,11 @@ public class Directory extends Entries implements Serializable{
 
 
     public Entries getEntries(String name) throws EntryUnknownException{
-         Map<String, Entries> entries= new HashMap<String, Entries>();
-         entries.putAll(_files);
-         entries.putAll(_dirs);
-      if( entries.get(name)!=null){
-                System.out.println("getEntries -> " + entries);
+         
+      if( getListEntries().get(name)!=null){
+                System.out.println("getEntries -> " + getListEntries());
 
-                return entries.get(name);
+                return getListEntries().get(name);
             
       }
       else  
@@ -299,7 +309,7 @@ public class Directory extends Entries implements Serializable{
  
     public void remove(Entries entry)throws IllegalRemovalException{
         if (entry.getType().equals("File")){
-            
+             
             _files.remove(entry.getName());
             setSize(-1);
         }
