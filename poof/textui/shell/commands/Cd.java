@@ -69,10 +69,10 @@ public class Cd extends Command<Shell> {
     }
 
         catch(EntryUnknownException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Mudar o directório de trabalho: Operação inválida: " +e.getMessage());
         }
         catch(IsNotDirectoryException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Mudar o directório de trabalho: Operação inválida: " +e.getMessage());
         }
         finally{
         d.display();
