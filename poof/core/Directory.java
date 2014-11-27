@@ -145,7 +145,7 @@ public class Directory extends Entries implements Serializable{
     public Files getFile(String name) throws EntryUnknownException,IsNotFileException{
        
       if( getListEntries().get(name)!=null ){
-        System.out.println("getFile");
+        
             if (getListEntries().get(name).getType().equals("File"))
 
                 return _files.get(name);
@@ -179,7 +179,7 @@ public class Directory extends Entries implements Serializable{
     public Entries getEntries(String name) throws EntryUnknownException{
          
       if( getListEntries().get(name)!=null){
-                System.out.println("getEntries -> " + getListEntries());
+                
 
                 return getListEntries().get(name);
             

@@ -48,7 +48,7 @@ public class Cd extends Command<Shell> {
 
         f.parse();
         try{
-        	System.out.println(file.toString());
+        	if (!file.toString().equals(".")){
         	if(file.toString().equals(".."))
         		{
                     if (entity().getFileSystem().getWorkDirectory().getFather()!=null){
@@ -66,6 +66,7 @@ public class Cd extends Command<Shell> {
         	}
             
         }
+    }
 
         catch(EntryUnknownException e){
             d.addNewLine(e.getMessage());

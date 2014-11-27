@@ -41,8 +41,9 @@ public class Ls extends Command<Shell> {
 
 
           d.addNewLine("d "+u.permissionToString()+u.getOwner()+" "+(u.getSize())*8+" .");
+          
           if (u.getName().equals("home")){
-            d.addNewLine("d "+ "- " + "/ "+ 8 +" ..");
+            d.addNewLine("d "+ "- " + "root "+ u.getListDir().size()*8+" ..");
           }
           else{
             d.addNewLine("d "+u.getFather().permissionToString()

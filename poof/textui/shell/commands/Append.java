@@ -44,15 +44,15 @@ public class Append extends Command<Shell> {
 	    	f.parse();
 
 		    	Files a= entity().getFileSystem().getWorkDirectory().getFile(file.toString());
-                 System.out.println("vou checkar");
+                 
                 entity().getFileSystem().checkUserFile(file.toString());
-                System.out.println("use check");
+                
 
 		    	f=new Form(title());
 		    	file = new InputString(f,Message.textRequest());
 		    	f.parse();
 		    	a.addToFile(file.toString());
-		    	System.out.println(a.getText()+"\n");
+		    	
 	  
         
     	}

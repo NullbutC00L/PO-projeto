@@ -286,8 +286,7 @@ public class FileSystem implements Serializable{
    
 
     public void checkUserFile(String file)throws AccessDeniedException{
-        System.out.println("dono da entrada ->"+_dir.getListEntries().get(file).getOwner());
-        System.out.println("_currentUser ->"+_currentUser.getUserName());
+        
         
          
         if(_dir.getListEntries().get(file).getOwner().equals(_currentUser.getUserName())
@@ -303,7 +302,8 @@ public class FileSystem implements Serializable{
     }
 
     public void checkIsMyDir(String file)throws AccessDeniedException{
-        if (_dir.getOwner().equals(_currentUser.getUserName()) || _dir.getPermission()==true){
+        if (_dir.getOwner().equals(_currentUser.getUserName())||getCurrentUser().getUserName().equals("root") 
+             || _dir.getPermission()==true){
 
 
         }
