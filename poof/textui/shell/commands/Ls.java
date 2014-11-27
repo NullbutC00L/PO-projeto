@@ -59,7 +59,7 @@ public class Ls extends Command<Shell> {
              tamanho=(e.getSize())*8;
             }
             else{
-              tamanho=e.getSize();
+              tamanho=e.getSize()+1;//contar com o \n
             }
             
 

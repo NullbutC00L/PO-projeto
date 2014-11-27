@@ -303,8 +303,8 @@ public class FileSystem implements Serializable{
     }
 
     public void checkIsMyDir(String file)throws AccessDeniedException{
-        if (_dir.getOwner().equals(_currentUser.getUserName())){
-            
+        if (_dir.getOwner().equals(_currentUser.getUserName()) || _dir.getPermission()==true){
+
 
         }
 

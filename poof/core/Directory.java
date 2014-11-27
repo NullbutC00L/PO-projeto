@@ -210,10 +210,10 @@ public class Directory extends Entries implements Serializable{
         List<Files> list1 = new ArrayList<Files>(_files.values());
         List<Entries> listFinal = new ArrayList<Entries>();
                 
-        Collections.sort(list);
-        Collections.sort(list1);
+        
         listFinal.addAll(list);
         listFinal.addAll(list1);
+        Collections.sort(listFinal);
         return listFinal;
     }
         /**

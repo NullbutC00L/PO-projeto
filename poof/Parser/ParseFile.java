@@ -150,8 +150,8 @@ public class ParseFile {
                
             }
 
-              ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory(),username);  //muda o owner para username
-              ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory(),bool);     //muda a permission para o falor de bool (true=public , false=private)
+              ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),username);  //muda o owner para username
+              ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),bool);     //muda a permission para o falor de bool (true=public , false=private)
               
            
 
