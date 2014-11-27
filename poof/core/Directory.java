@@ -176,9 +176,13 @@ public class Directory extends Entries implements Serializable{
 
 
     public Entries getEntries(String name) throws EntryUnknownException{
-      if( _entries.get(name)!=null){
+         Map<String, Entries> entries= new HashMap<String, Entries>();
+         entries.putAll(_files);
+         entries.putAll(_dirs);
+      if( entries.get(name)!=null){
+                System.out.println("getEntries -> " + entries);
 
-                return _entries.get(name);
+                return entries.get(name);
             
       }
       else  
@@ -300,17 +304,7 @@ public class Directory extends Entries implements Serializable{
             setSize(1);
         }
 
-    /**
-    * removeValue remove um subdirectorio do Directorio actual
-    * @param String name do subdirectorio
-    * 
-    */
-
-    public void removeValue(String name){
-        _entries.remove(name);
-        _dirs.remove(name);
-        setSize(-1);
-    }
+   
      
 
  
