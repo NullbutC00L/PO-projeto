@@ -59,8 +59,8 @@ public class Files extends Entries implements Serializable{
     * 
     */
 	public void addToFile (String text) {
-		setSize(text.length());
-		_text+=text;
+		setSize(text.length()+1);
+		_text+=(text+"\n");
 		
 	}
 
