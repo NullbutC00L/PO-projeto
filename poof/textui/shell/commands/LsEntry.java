@@ -50,7 +50,7 @@ public class LsEntry extends Command<Shell> {
          Directory u = entity().getFileSystem().getWorkDirectory();
         
         
-        InputString file = new InputString(f,Message.fileRequest());
+        InputString file = new InputString(f,Message.nameRequest());
 
         f.parse();
         try{
@@ -64,28 +64,17 @@ public class LsEntry extends Command<Shell> {
 
           }
           else{
-            entity().getFileSystem().jump(u.nextDir(file.toString()));
-            d.addNewLine("d "+u.permissionToString()+u.getName()+" "+(u.getSize())*8+" .");
-            if (u.getName().equals("home")){
-              d.addNewLine("d "+ "- " + "/ "+ 8 +" ..");
-            }
-            else{
-              d.addNewLine("d "+u.getFather().permissionToString()
-             +u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
-            }
+            entry=entity().getFileSystem().getWorkDirectory().getListDir().get(file.toString());
 
-            for(Entries e: entity().getFileSystem().getWorkDirectory().getOrder()){
-
-              tamanho=(e.getSize())*8;
-              d.addNewLine(e.choseFileDir()+e.permissionToString()+e.getOwner()+" "+tamanho+" "+e.getName());
-            } 
-            entity().getFileSystem().jump
-                (entity().getFileSystem().getWorkDirectory().getFather());
+            d.addNewLine("d "+entry.permissionToString()+u.getName()+" "+(u.getSize())*8+" "+ entry.getName());
+            
+           
+                
           }
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Listar entrada: Operação inválida: "+e.getMessage());
         }
         
         finally{
