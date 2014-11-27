@@ -76,13 +76,13 @@ public class ParseFile {
   
     String[] args = path.split("/");
       
-    Entries entry;
+    Entries entry=null;
     boolean bool=false;
     if (permission.equals("public")){
       bool=true;
     }
 
-    //if (isDir) 
+    if (isDir) {
       _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
 
 
@@ -110,7 +110,7 @@ public class ParseFile {
           }
            
         }
-
+          entry=_fileSystem.getWorkDirectory().getListDir().get(args[(args.length)-1]);
           ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory(),username);  //muda o owner para username
           ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory(),bool);     //muda a permission para o falor de bool (true=public , false=private)
           
@@ -118,15 +118,59 @@ public class ParseFile {
 
 
         _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
+        }
+
+        else{
+
+              _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
+
+
         
+            for(int i=2;i<args.length;i++){
+            
+
+           
+              if (_fileSystem.getWorkDirectory().searchDir(args[i])) //ver se existe este subdir
+              {
+                _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
+
+                
+              }
+              else{
+                
+                _fileSystem.getWorkDirectory().createFile(args[i]);  //cria um ficheiro no diretorio actual
+                entry=_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]);
+                
+                
+                
+
+
+
+              }
+               
+            }
+
+              ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory(),username);  //muda o owner para username
+              ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory(),bool);     //muda a permission para o falor de bool (true=public , false=private)
+              
+           
+
+
+            _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
+
+
+
+        }
       
  
         
 
         
 
-    return null;
+    return entry;
   } 
+
+
     /**
     * crea uma file com os parametros passados
     * @param String path
