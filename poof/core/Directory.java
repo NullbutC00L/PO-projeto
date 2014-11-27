@@ -73,7 +73,7 @@ public class Directory extends Entries implements Serializable{
     */
 
 	public void createSubDir(String name,String owner){
-		_dirs.put(name,new Directory(name,this,owner,this.getPermission()));
+		_dirs.put(name,new Directory(name,this,owner,false));
         
         setSize(1);
 
