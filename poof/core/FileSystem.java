@@ -40,11 +40,7 @@ public class FileSystem implements Serializable{
     private User _currentUser= new SuperUser(_dir);
   
 
-    /**
-    * lista de Path
-    */
-    private List<Directory> _path= new ArrayList<Directory>();
-
+   
     /**
     *Construtor do FileSystem que vai inicializar os atributos iniciais do Filesystem
     *
@@ -83,18 +79,7 @@ public class FileSystem implements Serializable{
 
 	}
 
-	/**
-    * listElement lista todas as entradas por ordem.
-    * 
-    * @return uma lista ordenada.
-    * 
-    */
-
-
-	public List listElement(){
-        return _path;
-
-	}
+	
 
 	
      /**
@@ -197,20 +182,10 @@ public class FileSystem implements Serializable{
 
 	}
 
-	/**
-    * getAllEntries  obetem-se todos os ficheiros/directorios do sistema de ficheiros.
-    * 
-    * @return lista de todos os ficheiros/directorios.
-    * 
-    */
-
-	public List getAllEntries (){
-        
-        return  _path;
 
 
 
-	}
+	
 
 
     /**
@@ -226,7 +201,9 @@ public class FileSystem implements Serializable{
         if (_currentUser.getUserName().equals("root") ){
                 if(_user.get(user)==null){ 
                     state=true;
-            
+                    
+                    Directory lastDir;
+                    lastDir=_dir;
             
                     _dir=_dir.getInitialPath();
 
@@ -235,8 +212,7 @@ public class FileSystem implements Serializable{
                     _user.put(user,new User(name,user,_dir));
                     _user.get(user).getDir().setFather(_dir);
                     _dir.addElement(user,_user.get(user).getDir());
-
-                    _dir=_dir.getListDir().get(_currentUser.getUserName());
+                    _dir=lastDir;
                    
             }
             else
@@ -268,7 +244,6 @@ public class FileSystem implements Serializable{
     */
     public void changeFileSystem(FileSystem system){
         this._dir=system._dir;
-        this._path=system._path;
         this._user=system._user;
 
     }
