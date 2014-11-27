@@ -99,7 +99,7 @@ public class ParseFile {
           }
           else{
             
-            _fileSystem.getWorkDirectory().createSubDir(args[i]);  //cria um subdiretorio no diretorio actual
+            _fileSystem.getWorkDirectory().createSubDir(args[i], _fileSystem.getCurrentUser().getUserName() );  //cria um subdiretorio no diretorio actual
             
             
             _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa

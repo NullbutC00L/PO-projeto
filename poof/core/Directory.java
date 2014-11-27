@@ -72,8 +72,8 @@ public class Directory extends Entries implements Serializable{
     * 
     */
 
-	public void createSubDir(String name){
-		_dirs.put(name,new Directory(name,this,this.getOwner(),this.getPermission()));
+	public void createSubDir(String name,String owner){
+		_dirs.put(name,new Directory(name,this,owner,this.getPermission()));
         
         setSize(1);
 

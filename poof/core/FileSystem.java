@@ -82,14 +82,14 @@ public class FileSystem implements Serializable{
                         }
                          else{
                             state=true;
-                            _dir.createSubDir(name);
+                            _dir.createSubDir(name,_currentUser.getUserName());
                          }
 
 
                     }
                     else{
                         state=true;
-                        _dir.createSubDir(name);
+                        _dir.createSubDir(name,_currentUser.getUserName());
                     }
 
 
@@ -98,13 +98,13 @@ public class FileSystem implements Serializable{
                  
                 else{
                     state=true;
-                    _dir.createSubDir(name);
+                    _dir.createSubDir(name,_currentUser.getUserName());
                 }
     }
 
     public void makeFile(String name)throws EntryExistsException,AccessDeniedException{
 
-        
+
         if(_dir.getListEntries().get(name)!=null){
             throw new EntryExistsException(name);
         }   
