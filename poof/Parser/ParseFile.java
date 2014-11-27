@@ -138,7 +138,7 @@ public class ParseFile {
               }
               else{
                 
-                _fileSystem.getWorkDirectory().createFile(args[i]);  //cria um ficheiro no diretorio actual
+                _fileSystem.getWorkDirectory().createFile(args[i],_fileSystem.getCurrentUser().getUserName());  //cria um ficheiro no diretorio actual
                 entry=_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]);
                 
                 

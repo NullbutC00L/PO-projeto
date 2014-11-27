@@ -42,28 +42,29 @@ public class Append extends Command<Shell> {
      		Form f=new Form(title());
 	     	InputString file = new InputString(f,Message.fileRequest());
 	    	f.parse();
+            Form p=new Form(title());
+            InputString text = new InputString(p,Message.textRequest());
+            p.parse();
 
 		    	Files a= entity().getFileSystem().getWorkDirectory().getFile(file.toString());
                  
                 entity().getFileSystem().checkUserFile(file.toString());
                 
 
-		    	f=new Form(title());
-		    	file = new InputString(f,Message.textRequest());
-		    	f.parse();
-		    	a.addToFile(file.toString());
+		    	
+		    	a.addToFile(text.toString());
 		    	
 	  
         
     	}
     	catch(EntryUnknownException e){
-    		d.addNewLine(e.getMessage());
+    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
     	}
     	catch(IsNotFileException e){
-    		d.addNewLine(e.getMessage());
+    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
     	}
     	catch(AccessDeniedException e){
-    		d.addNewLine(e.getMessage());
+    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
     	}
          finally{
         d.display();

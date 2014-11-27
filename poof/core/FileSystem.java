@@ -116,18 +116,18 @@ public class FileSystem implements Serializable{
 
                         else{
                             state=true;
-                            _dir.createFile(name);
+                            _dir.createFile(name,_currentUser.getUserName());
                         }
                     }
                     else{
                         state=true;
-                        _dir.createFile(name);
+                        _dir.createFile(name,_currentUser.getUserName());
                     }
         }
             
         else{
             state=true;
-            _dir.createFile(name);
+           _dir.createFile(name,_currentUser.getUserName());
         }
     }
 

@@ -55,10 +55,10 @@ public class Cat extends Command<Shell> {
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Ver conteúdo de ficheiro: Operação inválida: "+e.getMessage());
         }
         catch(IsNotFileException e){
-            d.addNewLine(e.getMessage());
+            d.addNewLine("Ver conteúdo de ficheiro: Operação inválida: "+e.getMessage());
         }
        
         finally{
