@@ -333,7 +333,7 @@ public class FileSystem implements Serializable{
     }
 
     public void setDir(Directory dir){
-        _dir=dir;
+        _dir.copy(dir);
 
     }
 

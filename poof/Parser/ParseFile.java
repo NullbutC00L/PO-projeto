@@ -81,94 +81,96 @@ public class ParseFile {
     if (permission.equals("public")){
       bool=true;
     }
+    if (args.length!=2){
+      if (isDir) {
+        _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
 
-    if (isDir) {
-      _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
 
-
-    
-      for(int i=2;i<args.length;i++){
         
-
-       
-          if (_fileSystem.getWorkDirectory().searchDir(args[i])) //ver se existe este subdir
-          {
-            _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
-
-            
-          }
-          else{
-            
-            _fileSystem.getWorkDirectory().createSubDir(args[i], _fileSystem.getCurrentUser().getUserName() );  //cria um subdiretorio no diretorio actual
-            
-            
-            _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
-            
-
-
-
-          }
-           
-        }
-          entry=_fileSystem.getWorkDirectory().getListDir().get(args[(args.length)-1]);
-          ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory(),username);  //muda o owner para username
-          ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory(),bool);     //muda a permission para o falor de bool (true=public , false=private)
+        for(int i=2;i<args.length;i++){
           
-       
 
+         
+            if (_fileSystem.getWorkDirectory().searchDir(args[i])) //ver se existe este subdir
+            {
+              _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
 
-        _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
-        }
-
-        else{
-
-              _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
-
-
-        
-            for(int i=2;i<args.length;i++){
-            
-
-           
-              if (_fileSystem.getWorkDirectory().searchDir(args[i])) //ver se existe este subdir
-              {
-                _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
-
-                
-              }
-              else{
-                
-                _fileSystem.getWorkDirectory().createFile(args[i],_fileSystem.getCurrentUser().getUserName());  //cria um ficheiro no diretorio actual
-                entry=_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]);
-                
-                
-                
-
-
-
-              }
-               
-            }
-
-              ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),username);  //muda o owner para username
-              ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),bool);     //muda a permission para o falor de bool (true=public , false=private)
               
-           
+            }
+            else{
+              
+              _fileSystem.getWorkDirectory().createSubDir(args[i], _fileSystem.getCurrentUser().getUserName() );  //cria um subdiretorio no diretorio actual
+              
+              
+              _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
+              
 
 
-            _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
+
+            }
+             
+          }
+            entry=_fileSystem.getWorkDirectory().getListDir().get(args[(args.length)-1]);
+            ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory(),username);  //muda o owner para username
+            ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory(),bool);     //muda a permission para o falor de bool (true=public , false=private)
+            
+         
+
+
+          _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
+          }
+
+          else{
+
+                _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());
+
+
+          
+              for(int i=2;i<args.length;i++){
+              
+
+             
+                if (_fileSystem.getWorkDirectory().searchDir(args[i])) //ver se existe este subdir
+                {
+                  _fileSystem.jump(_fileSystem.getWorkDirectory().nextDir(args[i])); //vai ao directorio actual e jumpa
+
+                  
+                }
+                else{
+                  
+                  _fileSystem.getWorkDirectory().createFile(args[i],_fileSystem.getCurrentUser().getUserName());  //cria um ficheiro no diretorio actual
+                  entry=_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]);
+                  
+                  
+                  
 
 
 
-        }
-      
- 
+                }
+                 
+              }
+
+                ((SuperUser)_fileSystem.getCurrentUser()).changeOwner(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),username);  //muda o owner para username
+                ((SuperUser)_fileSystem.getCurrentUser()).changePermission(_fileSystem.getWorkDirectory().getListFile().get(args[(args.length)-1]),bool);     //muda a permission para o falor de bool (true=public , false=private)
+                
+             
+
+
+              _fileSystem.jump( _fileSystem.getWorkDirectory().getInitialPath());    //volta ao diretorio inicial (/home)
+
+
+
+          }
         
+   
+          
 
-        
+          
 
-    return entry;
+      return entry;
   } 
+  return null;
+}
 
 
     /**

@@ -334,6 +334,16 @@ public class Directory extends Entries implements Serializable{
 
 
 
+    public void copy(Directory aux){
+        _dirs=aux.getListDir();
+        _files=aux.getListFile();
+        _fatherDir=aux.getFather();
+    }
+
+
+
+
+
 
 
 

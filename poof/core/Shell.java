@@ -103,8 +103,8 @@ public class Shell implements Serializable{
     _system.setState();
     _system.setUser(shell.getFileSystem().getUsers());
     _system.setDir(shell.getFileSystem().getWorkDirectory());
-    _system.setCurrentUserOpen(shell.getFileSystem().getCurrentUser());
-        
+    _system.setCurrentUser(shell.getFileSystem().getCurrentUser());
+    
    }
     
 

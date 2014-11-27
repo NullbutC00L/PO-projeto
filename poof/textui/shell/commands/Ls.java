@@ -45,6 +45,7 @@ public class Ls extends Command<Shell> {
           if (u.getName().equals("home")){
             d.addNewLine("d "+ "- " + "root "+ u.getListDir().size()*8+" ..");
           }
+          
           else{
             d.addNewLine("d "+u.getFather().permissionToString()
                 +u.getFather().getOwner()+" "+(u.getFather().getSize())*8+" ..");
