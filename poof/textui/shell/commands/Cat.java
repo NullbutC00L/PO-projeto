@@ -18,6 +18,7 @@ import poof.textui.shell.ShellEdit;
 
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
+import pt.utl.ist.po.ui.InvalidOperation;
 
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
@@ -39,7 +40,7 @@ public class Cat extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute(){
+    public final void execute()throws InvalidOperation {
 
         Display d = new Display(title());
         Form f = new Form(title());
@@ -55,10 +56,10 @@ public class Cat extends Command<Shell> {
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine("Ver conteúdo de ficheiro: Operação inválida: "+e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
         catch(IsNotFileException e){
-            d.addNewLine("Ver conteúdo de ficheiro: Operação inválida: "+e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
        
         finally{

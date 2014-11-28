@@ -16,7 +16,7 @@ import poof.core.Entries;
 import poof.textui.shell.MenuEntry;
 import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
@@ -39,7 +39,7 @@ public class LsEntry extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation {
 
 
 
@@ -74,7 +74,7 @@ public class LsEntry extends Command<Shell> {
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine("Listar entrada: Operação inválida: "+e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
         
         finally{

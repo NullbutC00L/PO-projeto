@@ -9,7 +9,7 @@ import poof.core.Shell;
 import poof.textui.shell.MenuEntry;
 import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.AccessDeniedException;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
@@ -32,7 +32,7 @@ public class Chmod extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute(){
+    public final void execute()throws InvalidOperation {
     
     Display d = new Display(title()); 
     Form f = new Form(title());
@@ -76,13 +76,11 @@ public class Chmod extends Command<Shell> {
                 }
 	  		}
         }
-        catch(EntryUnknownException x){
-            d.addNewLine(x.getMessage());
-            d.display();
+        catch(EntryUnknownException e){
+            throw new InvalidOperation(e.getMessage());
         }
         catch(AccessDeniedException e){
-            d.addNewLine(e.getMessage());
-            d.display();
+            throw new InvalidOperation(e.getMessage());
         }
         
     }

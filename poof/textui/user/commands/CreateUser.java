@@ -16,6 +16,7 @@ import static pt.utl.ist.po.ui.UserInteraction.IO;
 import pt.utl.ist.po.ui.InvalidOperation;
 import poof.textui.exception.UserExistsException;
 import poof.textui.exception.AccessDeniedException;
+import pt.utl.ist.po.ui.InvalidOperation;
 /**
 * Comando para criar um novo Utilizador.
 * 
@@ -34,7 +35,7 @@ public class CreateUser extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation {
     	
         Form f = new Form(title());
         InputString file = new InputString(f,Message.usernameRequest());
@@ -60,14 +61,12 @@ public class CreateUser extends Command<Shell> {
 
 
         catch (UserExistsException  e){
-             d.addNewLine("Criar utilizador: Operação inválida: "+e.getMessage());
-             d.display();
+            throw new InvalidOperation(e.getMessage());
 
         }
         
         catch (AccessDeniedException e ){
-            d.addNewLine("Criar utilizador: Operação inválida: "+e.getMessage());
-            d.display();
+            throw new InvalidOperation(e.getMessage());
 
 
         }

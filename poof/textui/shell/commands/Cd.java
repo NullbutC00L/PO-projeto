@@ -15,7 +15,7 @@ import poof.core.Files;
 import poof.textui.shell.MenuEntry;
 import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotDirectoryException;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
@@ -38,8 +38,8 @@ public class Cd extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
-    	Display d = new Display(title());
+    public final void execute() throws InvalidOperation {
+    	
 
         Form f = new Form(title());
         
@@ -69,14 +69,10 @@ public class Cd extends Command<Shell> {
     }
 
         catch(EntryUnknownException e){
-            d.addNewLine("Mudar o directório de trabalho: Operação inválida: " +e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
         catch(IsNotDirectoryException e){
-            d.addNewLine("Mudar o directório de trabalho: Operação inválida: " +e.getMessage());
-        }
-        finally{
-        d.display();
-        
+            throw new InvalidOperation(e.getMessage()); 
         }
        
      

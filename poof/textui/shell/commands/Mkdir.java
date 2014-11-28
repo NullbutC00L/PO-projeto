@@ -1,6 +1,6 @@
 package poof.textui.shell.commands;
 
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import pt.utl.ist.po.ui.InputString;
 import pt.utl.ist.po.ui.Command;
 import pt.utl.ist.po.ui.Display;
@@ -33,7 +33,7 @@ public class Mkdir extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation {
         Display d =new Display(title());
         try{
     	Form f = new Form(title());
@@ -44,12 +44,10 @@ public class Mkdir extends Command<Shell> {
     	entity().getFileSystem().makeDir(file.toString());
         }
         catch(AccessDeniedException e){
-            d.addNewLine(e.getMessage());
-            d.display();
+            throw new InvalidOperation(e.getMessage());
         }
         catch(EntryExistsException e){
-            d.addNewLine(e.getMessage());
-            d.display();
+            throw new InvalidOperation(e.getMessage());
         }
         
      

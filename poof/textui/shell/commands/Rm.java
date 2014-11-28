@@ -13,7 +13,7 @@ import poof.textui.shell.ShellEdit;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.AccessDeniedException;
 import poof.textui.exception.IllegalRemovalException;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
 /**
@@ -34,10 +34,10 @@ public class Rm extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation {
 
 
-        Display d = new Display(title());
+        
         Form f = new Form(title());
         
         
@@ -58,19 +58,15 @@ public class Rm extends Command<Shell> {
         }
 
         catch(EntryUnknownException e){
-            d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
         catch(AccessDeniedException e){
-             d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
+            throw new InvalidOperation(e.getMessage());
         }
          catch(IllegalRemovalException e){
-             d.addNewLine("Remover entrada: Operação inválida: "+e.getMessage());
+             throw new InvalidOperation(e.getMessage());
         }
        
-        finally{
-        d.display();
-        
-        }
      
 
        

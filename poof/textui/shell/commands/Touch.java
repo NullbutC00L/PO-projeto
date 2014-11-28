@@ -12,7 +12,7 @@ import poof.textui.shell.Message;
 import poof.textui.shell.ShellEdit;
 import poof.textui.exception.EntryExistsException;
 import poof.textui.exception.AccessDeniedException;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
 /**
@@ -33,7 +33,7 @@ public class Touch extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute() {
+    public final void execute() throws InvalidOperation {
     	Display d =new Display(title());
         try{
         Form f = new Form(title());
@@ -44,12 +44,10 @@ public class Touch extends Command<Shell> {
     	entity().getFileSystem().makeFile(file.toString());
         }
         catch(AccessDeniedException e){
-            d.addNewLine("Criar ficheiro: Operação inválida: "+e.getMessage());
-            d.display();
+            throw new InvalidOperation(e.getMessage());
         }
         catch(EntryExistsException e){
-           d.addNewLine("Criar ficheiro: Operação inválida: "+e.getMessage());
-            d.display();
+           throw new InvalidOperation(e.getMessage());
         }
 
        

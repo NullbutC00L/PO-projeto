@@ -14,7 +14,7 @@ import poof.textui.shell.ShellEdit;
 import poof.textui.exception.EntryUnknownException;
 import poof.textui.exception.IsNotFileException;
 import poof.textui.exception.AccessDeniedException;
-
+import pt.utl.ist.po.ui.InvalidOperation;
 import static pt.utl.ist.po.ui.UserInteraction.IO;
 
 /**
@@ -35,8 +35,8 @@ public class Append extends Command<Shell> {
     
     @Override
     @SuppressWarnings("nls")
-    public final void execute(){
-     	 Display d = new Display(title());
+    public final void execute() throws InvalidOperation {
+     	 
      	try{
             
      		Form f=new Form(title());
@@ -58,18 +58,15 @@ public class Append extends Command<Shell> {
         
     	}
     	catch(EntryUnknownException e){
-    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
+    		throw new InvalidOperation(e.getMessage());
     	}
     	catch(IsNotFileException e){
-    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
+    		throw new InvalidOperation(e.getMessage());
     	}
     	catch(AccessDeniedException e){
-    		d.addNewLine("Adicionar linha a ficheiro: Operação inválida: "+e.getMessage());
+    		throw new InvalidOperation(e.getMessage());
     	}
-         finally{
-        d.display();
-        
-        }
+         
         
     }
 }
