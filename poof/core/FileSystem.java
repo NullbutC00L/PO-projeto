@@ -23,6 +23,10 @@ import poof.textui.exception.*;
 
 
 public class FileSystem implements Serializable{
+     
+    /**
+    * boolean que indica se o FileSystem teve uma alteracao ou nao
+    */   
     private boolean state=false;
      /**
     * Objecto Directorio inicial Existente
@@ -102,6 +106,13 @@ public class FileSystem implements Serializable{
                 }
     }
 
+
+     /**
+    *   makeFile cria um File do directorio actual
+    *   @param recebe uma string que sera o nome do novo File
+    *
+    */
+
     public void makeFile(String name)throws EntryExistsException,AccessDeniedException{
 
 
@@ -155,7 +166,6 @@ public class FileSystem implements Serializable{
     * @return lista de todos os utilizadores.
     * 
     */
-
 	public List<User> getAllUsers (){
         List<User> list = new ArrayList<User>(_user.values());
         Collections.sort(list);
@@ -179,8 +189,6 @@ public class FileSystem implements Serializable{
     * @param name e o nome do utilizador.
     * 
     */
-
-
     public void createUser(String user,String name) throws AccessDeniedException,UserExistsException {
         if (_currentUser.getUserName().equals("root") ){
                 if(_user.get(user)==null){ 
@@ -286,7 +294,11 @@ public class FileSystem implements Serializable{
     }
 
    
-
+    /**
+    *   checkUserFile verifica se o Utilizador actual tem permissao para aceder e modificar
+    *    a entrada que esta a ser passada no parametro 
+    *   @param recebe uma string que sera o nome da entrada a testar
+    */
     public void checkUserFile(String file)throws AccessDeniedException{
         
         
@@ -303,6 +315,10 @@ public class FileSystem implements Serializable{
 
     }
 
+   /**
+    *  checkIsMyDir avalia se o user actual tem permissao para alterar/mexer no dir actual do FileSystem
+    *   @param recebe uma String com o nome do dir actual
+    */
     public void checkIsMyDir(String file)throws AccessDeniedException{
         if (_dir.getOwner().equals(_currentUser.getUserName())||getCurrentUser().getUserName().equals("root") 
              || _dir.getPermission()==true){
@@ -322,21 +338,34 @@ public class FileSystem implements Serializable{
 
 
 
-
+    /**
+    *   coloca o estado actual do FileSystem em false que indica que ainda nao ocorreu nenhuma
+    *   alterao neste 
+    */
     public void setState(){
         state=false;
     }
 
-
+    /**
+    *   da return do estado actual do Filesysteam que indica se este sofreu alguma alteracao ou nao    
+    *   @return do boolean referente ao estado actual do Filesystem 
+    */
     public boolean getState(){
         return state;
     }
 
+   /**
+    *   modifica o directorio actual do FileSystem para ser o dir passado como parametro
+    *   @param recebe um objecto Directory
+    */
     public void setDir(Directory dir){
         _dir.copy(dir);
 
     }
-
+   /**
+    *   modifica o Utilizador actual do FileSystem para o User passado como parametro
+    *   @param recebe um objecto User
+    */
     public void setCurrentUserOpen(User user){
         _currentUser=user;
     }

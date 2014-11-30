@@ -26,8 +26,13 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     */
 	private boolean _permission;
 
+    /**
+    * Nome do dono da Entrie
+    */
     private String _owner;
-
+    /**
+    * tamanho da Entrie
+    */
     private int _size;
 
     /**
@@ -152,7 +157,11 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
 
     }
 
-
+       /**
+    * setSize incrementa o size actual da entrada para a actual mais o size passado como parametro
+    * @param int tamanho a incrementar a Entrada
+    * 
+    */
     public void setSize(int size){
         _size+=size;
     }
@@ -164,7 +173,6 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
     * @return String permissao traduzida para string 
     * 
     */
-
     public String permissionToString( ){
         String permission;
         if (getPermission()==true){
@@ -177,7 +185,12 @@ public abstract class Entries implements Serializable , Comparable< Entries>{
         }
 
     }
-
+           /**
+    * choseFileDir  vê se a Entrie e um File ou Directory e associa-lhe o respectivo diminutivo
+    * d ou - para poder imprimir
+    * @return do diminutivo da Entrie
+    * 
+    */
     public String choseFileDir( ){
         String permission;
         if (getType().equals("Directory")){
